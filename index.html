@@ -104,4 +104,290 @@
         }
 
         /* Top Bar Navigation Tabs */
-        .tabs
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #a2a0b3;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 12px 28px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            background: rgba(116, 81, 247, 0.15);
+            color: #ffffff;
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 20px rgba(116, 81, 247, 0.4);
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        /* General UI Card Architecture */
+        .card {
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-glow);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            background: rgba(20, 16, 36, 0.7);
+            border-top-color: rgba(116, 81, 247, 0.2);
+            border-right-color: rgba(116, 81, 247, 0.2);
+            border-bottom-color: rgba(116, 81, 247, 0.2);
+        }
+
+        .card .date {
+            color: #636e72;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #e2e1e9;
+        }
+
+        .download-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Premium Family Grid Interface (KUET Clone Layout) */
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .student-card {
+            background: rgba(15, 12, 28, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(116, 81, 247, 0.3);
+            box-shadow: 0 10px 25px rgba(116, 81, 247, 0.15);
+        }
+
+        /* Initials/Avatar Image Style Block */
+        .avatar-container {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: rgba(116, 81, 247, 0.1);
+            border: 2px solid var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(116, 81, 247, 0.2);
+        }
+        
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            display: none; /* Image thakle script diye block hobe */
+        }
+
+        .student-card h3 {
+            font-size: 1.2rem;
+            margin: 0 0 8px 0;
+            color: #ffffff;
+        }
+
+        .student-card .roll {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0 0 4px 0;
+        }
+
+        .student-card .cell {
+            font-size: 0.85rem;
+            color: var(--accent-blue);
+            margin: 0 0 20px 0;
+        }
+
+        .visit-btn {
+            display: block;
+            background: #1a73e8;
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .visit-btn:hover {
+            background: #1557b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">RUET ME '25</div>
+            <h1>Academic Resource Portal</h1>
+            <p>Official Notices, Course Materials & Updates</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="portalSearch" class="search-input" onkeyup="filterSearch()" placeholder="Search targets inside active frame...">
+            <button class="search-btn">Search</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showContent('notices', 'Search in Latest Notices...')">Latest Notices</button>
+            <button class="tab-btn" onclick="showContent('resources', 'Search Class Notes & Resources...')">Class Notes & Resources</button>
+            <button class="tab-btn" onclick="showContent('family', 'Search inside Our Family database...')">Our Family</button>
+        </div>
+
+        <div id="notices" class="content active">
+            <div class="card searchable-item">
+                <div class="date">মে ১৯, ২০২৬</div>
+                <h3>মেকানিক্যাল ২৫ ব্যাচের অফিশিয়াল ওরিয়েন্টেশন নোটিশ ও রুটিন</h3>
+                <a href="#" class="download-link">Download Notice (PDF)</a>
+            </div>
+            <div class="card searchable-item">
+                <div class="date">এপ্রিল ১৫, ২০২৬</div>
+                <h3>৪র্থ কল ডিপার্টমেন্ট অ্যালোকেশন নোটিশ (ME)</h3>
+                <a href="#" class="download-link">Download Notice (PDF)</a>
+            </div>
+        </div>
+
+        <div id="resources" class="content">
+            <div class="card searchable-item">
+                <div class="date">Physics</div>
+                <h3>স্থির তড়িৎ ও আলোর তড়িৎ ক্রিয়া লেকচার শিট (Notes)</h3>
+                <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" class="download-link">Open Drive Link</a>
+            </div>
+            <div class="card searchable-item">
+                <div class="date">Chemistry</div>
+                <h3>রাসায়নিক বিক্রিয়া ও জটিল যৌগ সেমিস্টার ফাইনাল কোশ্চেন ব্যাংক</h3>
+                <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" class="download-link">Open Drive Link</a>
+            </div>
+        </div>
+
+        <div id="family" class="content">
+            <div class="family-grid">
+                
+                <div class="student-card searchable-item">
+                    <div class="avatar-container">
+                        <span>EHS</span> <img src="students/2502012.jpg" alt="Profile" class="avatar-img" onerror="this.style.display='none'">
+                    </div>
+                    <h3>Ehasanul Haque Shihab</h3>
+                    <p class="roll">Roll: 2502012</p>
+                    <p class="cell">Cell: 01951245709</p>
+                    <a href="#" class="visit-btn">Visit Profile</a>
+                </div>
+
+                <div class="student-card searchable-item">
+                    <div class="avatar-container">
+                        <span>AA</span>
+                    </div>
+                    <h3>Ariq Awsaf</h3>
+                    <p class="roll">Roll: 2502013</p>
+                    <p class="cell">Cell: 017XXXXXXXX</p>
+                    <a href="#" class="visit-btn">Visit Profile</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // System Tab Switching Core Engine
+        function showContent(tabName, placeholderText) {
+            var i;
+            var content = document.getElementsByClassName("content");
+            for (i = 0; i < content.length; i++) {
+                content[i].classList.remove("active");
+            }
+            var tabLinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+            
+            // Sync search element properties
+            var searchInput = document.getElementById("portalSearch");
+            searchInput.value = "";
+            searchInput.placeholder = placeholderText;
+            filterSearch();
+        }
+
+        // Live Grid Client-side Filtering Logic (KUET Clone Utility)
+        function filterSearch() {
+            var input = document.getElementById("portalSearch");
+            var filter = input.value.toLowerCase();
+            var activeContent = document.querySelector(".content.active");
+            var items = activeContent.getElementsByClassName("searchable-item");
+
+            for (var i = 0; i < items.length; i++) {
+                var textContent = items[i].textContent || items[i].innerText;
+                if (textContent.toLowerCase().indexOf(filter) > -1) {
+                    items[i].style.display = "";
+                } else {
+                    items[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
