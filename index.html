@@ -1,57 +1,485 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUET ME '25 Academic Resource Portal</title>
+    <style>
+        :root {
+            --bg-color: #05030a;
+            --card-bg: rgba(13, 10, 24, 0.7);
+            --primary-glow: #7451f7;
+            --accent-blue: #38b6ff;
+            --text-main: #ffffff;
+            --text-muted: #8f8aa7;
+        }
 
-<!-- Tab 1: Latest Notices -->
-<div id="notices" class="tab-content active">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            background-image: 
+                radial-gradient(circle at 50% 10%, #170d2e 0%, #05030a 60%),
+                radial-gradient(circle at 10% 80%, #0a1128 0%, transparent 40%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
 
-            <div class="notice-card">
-                <span class="date">APRIL 15, 2026</span>
-                <h3>4th Call Department Allocation (KA)</h3>
-                <a href="https://drive.google.com/file/d/1eroYjpnronMFIg5uZ6Pd_8gS3GRw7lr2/view?usp=drive_link" target="_blank" class="download-btn">Download Notice (PDF)</a>
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .badge {
+            background: rgba(108, 92, 231, 0.1);
+            border: 2px solid var(--primary-glow);
+            color: var(--text-main);
+            padding: 8px 24px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 0 15px rgba(116, 81, 247, 0.4);
+            display: inline-block;
+        }
+
+        header h1 {
+            margin: 20px 0 5px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Search Bar Layout */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            max-width: 600px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 4px;
+        }
+
+        .search-input {
+            flex: 1;
+            background: none;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .search-input::placeholder {
+            color: #524f66;
+        }
+
+        .search-btn {
+            background: var(--primary-glow);
+            border: none;
+            color: white;
+            padding: 0 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background: #5f3bd4;
+        }
+
+        /* Navigation Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #a2a0b3;
+            font-size: 0.95rem;
+            cursor: pointer;
+            padding: 12px 28px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+        }
+
+        .tab-btn.active {
+            background: rgba(116, 81, 247, 0.15);
+            color: #ffffff;
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 20px rgba(116, 81, 247, 0.4);
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        /* Notices & Resource Cards */
+        .card {
+            background: var(--card-bg);
+            border-left: 4px solid var(--primary-glow);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 0 12px 12px 0;
+            padding: 24px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            background: rgba(20, 16, 36, 0.7);
+        }
+
+        .card .date {
+            color: #636e72;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #e2e1e9;
+        }
+
+        .download-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Students Family Grid CSS Layout */
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .student-card {
+            background: rgba(15, 12, 28, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 25px 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(116, 81, 247, 0.3);
+            box-shadow: 0 10px 25px rgba(116, 81, 247, 0.15);
+        }
+
+        .avatar-container {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: rgba(116, 81, 247, 0.1);
+            border: 2px solid var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(116, 81, 247, 0.2);
+            position: relative;
+        }
+        
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .student-card h3 {
+            font-size: 1.15rem;
+            margin: 0 0 6px 0;
+            color: #ffffff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .student-card .roll {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0 0 4px 0;
+        }
+
+        .student-card .section-badge {
+            display: inline-block;
+            background: rgba(56, 182, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .student-card .cell {
+            font-size: 0.85rem;
+            color: #1dd1a1;
+            margin: 0 0 15px 0;
+        }
+
+        .visit-btn {
+            display: block;
+            background: #1a73e8;
+            color: white;
+            text-decoration: none;
+            padding: 8px 0;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .visit-btn:hover {
+            background: #1557b0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="badge">RUET ME '25</div>
+            <h1>Academic Resource Portal</h1>
+            <p>Official Notices, Course Materials & Updates</p>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="portalSearch" class="search-input" onkeyup="filterSearch()" placeholder="Search targets inside active frame...">
+            <button class="search-btn">Search</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showContent('notices', 'Search in Latest Notices...')">Latest Notices</button>
+            <button class="tab-btn" onclick="showContent('resources', 'Search Class Notes & Resources...')">Class Notes & Resources</button>
+            <button class="tab-btn" onclick="showContent('family', 'Search inside Our Family database (Name/Roll)...')">Our Family</button>
+        </div>
+
+        <div id="notices" class="content active">
+            <div class="card searchable-item">
+                <div class="date">মে ১৯, ২০২৬</div>
+                <h3>মেকানিক্যাল ২৫ ব্যাচের অফিশিয়াল ওরিয়েন্টেশন নোটিশ ও রুটিন</h3>
+                <a href="#" class="download-link">Download Notice (PDF)</a>
             </div>
+        </div>
 
-<div class="notice-card">
-<span class="date"> APRIL 12, 2026</span>
-<h3>Admission Notice (4th Call)</h3>
-@@ -698,6 +705,21 @@ <h3>Admission Test Result (Group KA)</h3>
-</tr>
-</thead>
-<tbody>
+        <div id="resources" class="content">
+            <div class="card searchable-item">
+                <div class="date">Physics</div>
+                <h3>স্থির তড়িৎ ও আলোর তড়িৎ ক্রিয়া লেকচার শিট (Notes)</h3>
+                <a href="YOUR_GOOGLE_DRIVE_LINK_HERE" target="_blank" class="download-link">Open Drive Link</a>
+            </div>
+        </div>
 
-                    <tr>
-                        <td>Course Details</td>
-                        <td>Course Code, Title & Credit</td>
-                        <td>18-May-2026</td>
-                        <td><a href="https://www.kuet.ac.bd/eee/ugcurriculum" target="_blank" class="download-btn">View</a></td>
-                    </tr>
+        <div id="family" class="content">
+            <div class="family-grid" id="studentsGrid">
+                </div>
+        </div>
+    </div>
 
-                    <tr>
-                        <td>Telegram bot</td>
-                        <td>হুতুম ১০১ - a Chat Bot for KUETians.</td>
-                        <td>10-April-2026</td>
-                        <td><a href="https://t.me/iamhutumbot" target="_blank" class="download-btn">View</a></td>
-                    </tr>
-                    
-<tr>
-<td>Course Syllabus</td>
-<td>Electrical & Electronic Engineering</td>
-@@ -712,12 +734,6 @@ <h3>Admission Test Result (Group KA)</h3>
-<td><a href="https://docs.google.com/spreadsheets/d/1BHysFfKpcX8flJ1P9uz15eYIdPjGMJhj7tSRmtErFGo/edit?usp=sharing" target="_blank" class="download-btn">View</a></td>
-</tr>
+    <script>
+        // Full RUET ME '25 Database Array fetched from official PDF sheet
+        const studentsData = [
+            // --- SECTION A ---
+            { roll: "2502001", name: "ATIQ FAIYAZ RAHMAN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502002", name: "FARHAN SADIK SIAM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502003", name: "SALMAN AZIZ MAHI", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502004", name: "TASNIM ALAM SHUVRO", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502005", name: "MD. MAHADI HASSAN BHUIYAN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502006", name: "TASNIA AHMED", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502007", name: "MD. OMAR FARUQUE", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502008", name: "RHIJU DHAR", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502009", name: "EAMIN MAHMUD", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502010", name: "ABRAR FAIYAZ", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502011", name: "SHAIFUL ISLAM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502012", name: "MD. EHASANUL HAQUE SHIHAB", sec: "A", cell: "01951245709", fb: "#" }, // Your Profile Attached
+            { roll: "2502013", name: "MD. ABDULLAH HAQUE EMON", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502014", name: "MD. MUHTASIN ISLAM SAMIN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502015", name: "THASUN HANEEN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502016", name: "MD. NUSAIB-UL ISLAM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502017", name: "SAKIB AHMED SOJOL", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502018", name: "ANUPOM CHANDA AURGO", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502019", name: "EKHTIAR UDDIN AHMED", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502020", name: "MAINUL ISLAM KHAN SHAHAD", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502021", name: "MD. MAHMUD HASAN MAFI", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502022", name: "DIPON MONDAL", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502023", name: "ARAFAT ISLAM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502024", name: "FAHIMUL HABIB", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502025", name: "RAIHAN HOSSAIN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502026", name: "JUBAYER AHMED", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502027", name: "ANTARA SAHA", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502028", name: "EHSANUL KABIR", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502029", name: "MAHID KHAN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502030", name: "PRITUL DEVNATH", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502031", name: "TOHA ISLAM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502032", name: "FARHANA ALAM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502033", name: "MUNTASIR MAHBUB", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502034", name: "MD. NAIMUR RAHMAN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502035", name: "MAHIR MAHAMUD", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502036", name: "MD. NAIM HOSSAIN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502037", name: "SWARNIL BANIK", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502038", name: "TASIN AHAMMED RAFI", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502039", name: "NOOR REJWAN KHAN OMI", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502040", name: "TOUFICA JAHAN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502041", name: "MD. TAREK", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502042", name: "RAFYET ULLAH SANI", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502043", name: "SOUVIK ACHARJEE", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502044", name: "MD. HASAN MAHAMUD", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502045", name: "TANVIR MAHTAB APURBA", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502046", name: "MD. SIFAT AHMED", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502047", name: "TAUHIDUL ISLAM TAMIM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502048", name: "MD. MASRUR IRTISUM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502049", name: "MD. MAHDI HASAN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502050", name: "FARDIN SARDAR", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502051", name: "MD. FAYYAZ ZAMAN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502052", name: "ALIF MAHMUD", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502053", name: "SUNBIN AHMED", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502054", name: "ABDULLAH", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502055", name: "MD. MUSHFIQUE SAD AKIB", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502056", name: "PONUEL PRITOM ROY", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502057", name: "MD. MASUM AL IMRAN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502058", name: "JUNAID JAMAL TASIN", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502059", name: "MD. YASIN KAZI", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502060", name: "TAOFIQUL ISLAM RUPOM", sec: "A", cell: "01XXXXXXXXX", fb: "#" },
 
-                    <tr>
-                        <td>Telegram bot</td>
-                        <td>হুতুম ১০১ - a Chat Bot for KUETians.</td>
-                        <td>10-April-2026</td>
-                        <td><a href="https://t.me/iamhutumbot" target="_blank" class="download-btn">View</a></td>
-                    </tr>
-</tbody>
-</table>
-</div>
-@@ -762,7 +778,7 @@ <h2>Contact the Author</h2>
-24: "S M Bodruzzaman Siam", 25: "Jarin Tasnim", 26: "Ayan Sarkar", 27: "Arpon Ahyan",
-28: "Md R. Islam Shupto", 29: "Ishtiak Rohan", 30: "Abdullah Oualid Akash", 31: "Shadman Saif", 33: "Mahim Munaem",
-34: "Nuruzzaman Rakib", 35: "Fuad Rahman", 36: "Fahim Abdullah", 37: "Md Sojib Sheikh",
-        38: "Taseen Alam", 39: "Talha Hoque", 40: "Mahir Faisal", 41: "MD Shad",
-        38: "Taseen Alam", 39: "Mahmudul Hoque Talha", 40: "Mahir Faisal", 41: "MD Shad",
-42: "Umme Jannatun Habiba Pushpita", 43: "Atul Sarkar", 44: "Wafa Ahmed Prapti",
-45: "Shaharia Alam Mahi", 46: "Shuhanur Rahman Shuhan", 47: "Enan Ishraq",
-48: "Anindro Biswas", 49: "Xaif Rohan", 50: "Kamrul Hasan Abir",
+            // --- SECTION B ---
+            { roll: "2502061", name: "S. M. IFTEKHAR ALAM TANVIR", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502062", name: "ABDULLAH AL AZIZ", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502063", name: "AFIAH MUBASHSHIRAH", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502064", name: "SUMITA BINTE HABIB SNEHA", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502065", name: "MD. SALEH UDDIN ZOBAYER", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502066", name: "MD. ALL EMRAN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502067", name: "ZAHEDUR RAFSAN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502068", name: "REYAD AHMED SARKER", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502069", name: "NAZIR SHAVRY RUSHAD", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502070", name: "JAOWAD SADMAN CHOWDHURY", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502071", name: "SAAD GIFARY", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502072", name: "MD. MASRAFI RAHMAN JIHAD", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502073", name: "ISTIAQUE AHMMAD TUSHER", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502074", name: "MD. ARIF HASNAT MAHIN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502075", name: "MD. AL-AMIN KHAN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502076", name: "MUHAIMIN ISLAM AHON", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502077", name: "SAJEDUL ALAM SADI", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502078", name: "ADITTYA BISWAS", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502079", name: "MD. ALAMIN HOSSAIN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502080", name: "ANAMUL HUQUE SOUROV", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502081", name: "AFIF AHMED", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502082", name: "MD. PARVEZ MIAH", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502083", name: "AORPON ROY", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502084", name: "MD. ZAHID HASSAN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502085", name: "NABENDU MONDAL", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502086", name: "MD. FARHAN SABA", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502087", name: "MD. SOHAN ALAM BADHON", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502088", name: "AROUP DEVNATH", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502089", name: "MAHMUDUL SIKDER LABIB", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502090", name: "MD. SHAMSUZZAMAN PATOWARI", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502091", name: "MD. SHADHIN HOSSAIN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502092", name: "AHNAF AKIF", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502093", name: "AHNAF IQBAL", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502094", name: "LAMIM MAHMUD BORNO", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502095", name: "KAZI AHNAF MUSTAFIZ", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502096", name: "HIMEL SARKER", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502097", name: "KAZI SAYEED AHSAN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502098", name: "AMRIT ROY", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502099", name: "MD. ALIAR AHMED", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502100", name: "MD. RUBEL HOSSAIN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502101", name: "MUJAKKIR HOSSAIN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502102", name: "MD. NAHIAN ISLAM", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502103", name: "AFIA FARZANA KHAN PRITHA", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502104", name: "MD. IFTIKHAR OLIULLAH", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502105", name: "ABDUS SAMAD", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502106", name: "ABDUR RAHIM", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502107", name: "SHAHRIAR KUDDUS", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502108", name: "MD. MAHMUDUR RAHMAN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502109", name: "SHADHIN KUMAR SHIKDER", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502110", name: "FABIHA MONIR PRATHAMA", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502111", name: "MD. HASIBUL HOSSAIN", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502112", name: "MD. RAHIK TANHA", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502113", name: "MD. NAFI-UL-ISLAM", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502114", name: "MAHIR AHNAF ISLAM MUGDHO", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502115", name: "TAFSAN ISLAM SANJI", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502116", name: "MD. GOLAM KIBRIYA", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502117", name: "UMME ATIKA", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502118", name: "MD. MAHAFUJ AHAMED MAFI", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502119", name: "SHREE KASHOB DEV", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502120", name: "MAHFUJA FARIHA", sec: "B", cell: "01XXXXXXXXX", fb: "#" },
+
+            // --- SECTION C ---
+            { roll: "2502121", name: "RIJWAN AHMAD", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502122", name: "ABU SUFIAN", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502123", name: "TAIEF BIN MOHSIN", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502124", name: "MD. FAHIM SADIK", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502125", name: "ATHAI HABIBA", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502126", name: "MST. ANIKA TAHSIN", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502127", name: "KAZI NAFIZUR RAHMAN", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502128", name: "IFTEKHAR AL SAMI", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502129", name: "NOWSEN MOTIN NOWREEN", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502130", name: "MD. TASEEN MOSHAROF", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502131", name: "MD. MEHEDI HASAN SOIKOT", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502132", name: "SHAHEDUL ALAM TAHASIN", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502133", name: "MD. MOSTAFIZUR SARKER", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502134", name: "SHUVAJIT DWARI", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502135", name: "MD. NAZMUL HOSSAIN MOLLIK", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502136", name: "KHAIRUL AMIN SIDDIQI", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502137", name: "HAMIM AL WAHID AWON", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502138", name: "MD. NAFIS IQBAL", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502139", name: "TAKIAN ALI KHAN MAHADI", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502140", name: "MD. SABBIR AHMMAD", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502141", name: "SPONDON CHAKRABORTY UTSHO", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502142", name: "ASHRAFUL ISLAM TONOY", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502143", name: "SHAMS EHSAN", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502144", name: "MD. ABDULLAH AL SHAFI", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502145", name: "SABBIR HOSSAIN SAIF", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502146", name: "MD. DAIYAN SAJJAD SHIFAT", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502147", name: "MANISH KANTI DAS", sec: "C", cell: "01XXXXXXXXX", fb: "#" },
+            { roll: "2502148", name: "MD.
