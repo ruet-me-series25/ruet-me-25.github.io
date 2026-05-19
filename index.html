@@ -1,171 +1,192 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RUET ME '25 Academic Portal</title>
+    <title>RUET ME '25 Academic Resource Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --bg: #0f0f12; --card: #1c1c24; --accent: #6c5ce7; --text: #ffffff; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
-        .container { max-width: 900px; margin: auto; }
-        header { text-align: center; margin-bottom: 30px; }
-        .nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .nav-btn { background: var(--card); border: 1px solid #333; color: white; padding: 10px 20px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
-        .nav-btn:hover { background: var(--accent); }
-        .search-box { width: 100%; padding: 12px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #333; background: var(--card); color: white; box-sizing: border-box; }
-        .family-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; }
-        .student-card { background: var(--card); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid #333; }
-        .avatar { width: 60px; height: 60px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; font-size: 20px; }
+        :root {
+            --bg: #09090b;
+            --card-bg: #111118;
+            --accent: #6c5ce7;
+            --text: #ffffff;
+            --border: #2d2d3a;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: auto; text-align: center; }
+        
+        h1 { margin-bottom: 5px; }
+        
+        .search-container { margin: 30px 0; display: flex; justify-content: center; gap: 10px; }
+        .search-box { width: 60%; padding: 12px 20px; border-radius: 25px; border: 1px solid var(--border); background: var(--card-bg); color: white; }
+        .search-btn { padding: 10px 25px; border-radius: 25px; border: none; background: var(--accent); color: white; cursor: pointer; }
+
+        .nav-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .tab-btn { padding: 10px 25px; border-radius: 20px; border: 1px solid var(--border); background: var(--card-bg); color: white; cursor: pointer; }
+        .tab-btn.active { border-color: var(--accent); }
+
+        .family-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: left; }
+        .student-card { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid var(--border); }
+        .avatar { width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 10px; }
+        .profile-btn { display: block; margin-top: 15px; padding: 8px; text-align: center; background: var(--accent); color: white; text-decoration: none; border-radius: 5px; }
+        
         .content-section { display: none; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <header>
-        <h1>RUET ME '25</h1>
-        <p>Official Academic Resource Portal</p>
-    </header>
+    <h1>RUET ME '25</h1>
+    <p>Academic Resource Portal</p>
 
-    <div class="nav">
-        <button class="nav-btn" onclick="showContent('notices')">Latest Notices</button>
-        <button class="nav-btn" onclick="showContent('family')">Our Family</button>
+    <div class="search-container">
+        <input type="text" id="search" class="search-box" placeholder="Search in Our Family..." onkeyup="filter()">
+        <button class="search-btn">Search</button>
     </div>
 
-    <input type="text" id="search" class="search-box" placeholder="Search by name or roll..." onkeyup="filter()">
-
-    <div id="notices" class="content-section" style="display:block;">
-        <h3>Latest Notices</h3>
-        <p>Mechanical '25 Official Orientation Notice & Routine.</p>
+    <div class="nav-tabs">
+        <button class="tab-btn" onclick="showContent('notices')">Latest Notices</button>
+        <button class="tab-btn" onclick="showContent('resources')">Class Notes & Resources</button>
+        <button class="tab-btn active" onclick="showContent('family')">Our Family</button>
     </div>
 
-    <div id="family" class="content-section">
+    <div id="family" class="content-section" style="display: block;">
         <div id="studentsGrid" class="family-grid"></div>
     </div>
 </div>
 
 <script>
-    // ১৮০ জন স্টুডেন্টের ডাটাবেস (PDF থেকে সংগৃহীত)
     const students = [
-        { roll: "2502001", name: "ATIQ FAIYAZ RAHMAN" }, { roll: "2502002", name: "FARHAN SADIK SIAM" },
-        { roll: "2502003", name: "SALMAN AZIZ MAHI" }, { roll: "2502004", name: "TASNIM ALAM SHUVRO" },
-        { roll: "2502005", name: "MD. MAHADI HASSAN BHUIYAN" }, { roll: "2502006", name: "TASNIA AHMED" },
-        { roll: "2502007", name: "MD. OMAR FARUQUE" }, { roll: "2502008", name: "RHIJU DHAR" },
-        { roll: "2502009", name: "EAMIN MAHMUD" }, { roll: "2502010", name: "ABRAR FAIYAZ" },
-        { roll: "2502011", name: "SHAIFUL ISLAM" }, { roll: "2502012", name: "MD. EHASANUL HAQUE SHIHAB" },
-        { roll: "2502013", name: "MD. ABDULLAH HAQUE EMON" }, { roll: "2502014", name: "MD. MUHTASIN ISLAM SAMIN" },
-        { roll: "2502015", name: "THASUN HANEEN" }, { roll: "2502016", name: "MD. NUSAIB-UL ISLAM" },
-        { roll: "2502017", name: "SAKIB AHMED SOJOL" }, { roll: "2502018", name: "ANUPOM CHANDA AURGO" },
-        { roll: "2502019", name: "EKHTIAR UDDIN AHMED" }, { roll: "2502020", name: "MAINUL ISLAM KHAN SHAHAD" },
-        { roll: "2502021", name: "MD. MAHMUD HASAN MAFI" }, { roll: "2502022", name: "DIPON MONDAL" },
-        { roll: "2502023", name: "ARAFAT ISLAM" }, { roll: "2502024", name: "FAHIMUL HABIB" },
-        { roll: "2502025", name: "RAIHAN HOSSAIN" }, { roll: "2502026", name: "JUBAYER AHMED" },
-        { roll: "2502027", name: "ANTARA SAHA" }, { roll: "2502028", name: "EHSANUL KABIR" },
-        { roll: "2502029", name: "MAHID KHAN" }, { roll: "2502030", name: "PRITUL DEVNATH" },
-        { roll: "2502031", name: "TOHA ISLAM" }, { roll: "2502032", name: "FARHANA ALAM" },
-        { roll: "2502033", name: "MUNTASIR MAHBUB" }, { roll: "2502034", name: "MD. NAIMUR RAHMAN" },
-        { roll: "2502035", name: "MAHIR MAHAMUD" }, { roll: "2502036", name: "MD. NAIM HOSSAIN" },
-        { roll: "2502037", name: "SWARNIL BANIK" }, { roll: "2502038", name: "TASIN AHAMMED RAFI" },
-        { roll: "2502039", name: "NOOR REJWAN KHAN OMI" }, { roll: "2502040", name: "TOUFICA JAHAN" },
-        { roll: "2502041", name: "MD. TAREK" }, { roll: "2502042", name: "RAFYET ULLAH SANI" },
-        { roll: "2502043", name: "SOUVIK ACHARJEE" }, { roll: "2502044", name: "MD. HASAN MAHAMUD" },
-        { roll: "2502045", name: "TANVIR MAHTAB APURBA" }, { roll: "2502046", name: "MD. SIFAT AHMED" },
-        { roll: "2502047", name: "TAUHIDUL ISLAM TAMIM" }, { roll: "2502048", name: "MD. MASRUR IRTISUM" },
-        { roll: "2502049", name: "MD. MAHDI HASAN" }, { roll: "2502050", name: "FARDIN SARDAR" },
-        { roll: "2502051", name: "MD. FAYYAZ ZAMAN" }, { roll: "2502052", name: "ALIF MAHMUD" },
-        { roll: "2502053", name: "SUNBIN AHMED" }, { roll: "2502054", name: "ABDULLAH" },
-        { roll: "2502055", name: "MD. MUSHFIQUE SAD AKIB" }, { roll: "2502056", name: "PONUEL PRITOM ROY" },
-        { roll: "2502057", name: "MD. MASUM AL IMRAN" }, { roll: "2502058", name: "JUNAID JAMAL TASIN" },
-        { roll: "2502059", name: "MD. YASIN KAZI" }, { roll: "2502060", name: "TAOFIQUL ISLAM RUPOM" },
-        { roll: "2502061", name: "S. M. IFTEKHAR ALAM TANVIR" }, { roll: "2502062", name: "ABDULLAH AL AZIZ" },
-        { roll: "2502063", name: "AFIAH MUBASHSHIRAH" }, { roll: "2502064", name: "SUMITA BINTE HABIB SNEHA" },
-        { roll: "2502065", name: "MD. SALEH UDDIN ZOBAYER" }, { roll: "2502066", name: "MD. ALL EMRAN" },
-        { roll: "2502067", name: "ZAHEDUR RAFSAN" }, { roll: "2502068", name: "REYAD AHMED SARKER" },
-        { roll: "2502069", name: "NAZIR SHAVRY RUSHAD" }, { roll: "2502070", name: "JAOWAD SADMAN CHOWDHURY" },
-        { roll: "2502071", name: "SAAD GIFARY" }, { roll: "2502072", name: "MD. MASRAFI RAHMAN JIHAD" },
-        { roll: "2502073", name: "ISTIAQUE AHMMAD TUSHER" }, { roll: "2502074", name: "MD. ARIF HASNAT MAHIN" },
-        { roll: "2502075", name: "MD. AL-AMIN KHAN" }, { roll: "2502076", name: "MUHAIMIN ISLAM AHON" },
-        { roll: "2502077", name: "SAJEDUL ALAM SADI" }, { roll: "2502078", name: "ADITTYA BISWAS" },
-        { roll: "2502079", name: "MD. ALAMIN HOSSAIN" }, { roll: "2502080", name: "ANAMUL HUQUE SOUROV" },
-        { roll: "2502081", name: "AFIF AHMED" }, { roll: "2502082", name: "MD. PARVEZ MIAH" },
-        { roll: "2502083", name: "AORPON ROY" }, { roll: "2502084", name: "MD. ZAHID HASSAN" },
-        { roll: "2502085", name: "NABENDU MONDAL" }, { roll: "2502086", name: "MD. FARHAN SABA" },
-        { roll: "2502087", name: "MD. SOHAN ALAM BADHON" }, { roll: "2502088", name: "AROUP DEVNATH" },
-        { roll: "2502089", name: "MAHMUDUL SIKDER LABIB" }, { roll: "2502090", name: "MD. SHAMSUZZAMAN PATOWARI" },
-        { roll: "2502091", name: "MD. SHADHIN HOSSAIN" }, { roll: "2502092", name: "AHNAF AKIF" },
-        { roll: "2502093", name: "AHNAF IQBAL" }, { roll: "2502094", name: "LAMIM MAHMUD BORNO" },
-        { roll: "2502095", name: "KAZI AHNAF MUSTAFIZ" }, { roll: "2502096", name: "HIMEL SARKER" },
-        { roll: "2502097", name: "KAZI SAYEED AHSAN" }, { roll: "2502098", name: "AMRIT ROY" },
-        { roll: "2502099", name: "MD. ALIAR AHMED" }, { roll: "2502100", name: "MD. RUBEL HOSSAIN" },
-        { roll: "2502101", name: "MUJAKKIR HOSSAIN" }, { roll: "2502102", name: "MD. NAHIAN ISLAM" },
-        { roll: "2502103", name: "AFIA FARZANA KHAN PRITHA" }, { roll: "2502104", name: "MD. IFTIKHAR OLIULLAH" },
-        { roll: "2502105", name: "ABDUS SAMAD" }, { roll: "2502106", name: "ABDUR RAHIM" },
-        { roll: "2502107", name: "SHAHRIAR KUDDUS" }, { roll: "2502108", name: "MD. MAHMUDUR RAHMAN" },
-        { roll: "2502109", name: "SHADHIN KUMAR SHIKDER" }, { roll: "2502110", name: "FABIHA MONIR PRATHAMA" },
-        { roll: "2502111", name: "MD. HASIBUL HOSSAIN" }, { roll: "2502112", name: "MD. RAHIK TANHA" },
-        { roll: "2502113", name: "MD. NAFI-UL-ISLAM" }, { roll: "2502114", name: "MAHIR AHNAF ISLAM MUGDHO" },
-        { roll: "2502115", name: "TAFSAN ISLAM SANJI" }, { roll: "2502116", name: "MD. GOLAM KIBRIYA" },
-        { roll: "2502117", name: "UMME ATIKA" }, { roll: "2502118", name: "MD. MAHAFUJ AHAMED MAFI" },
-        { roll: "2502119", name: "SHREE KASHOB DEV" }, { roll: "2502120", name: "MAHFUJA FARIHA" },
-        { roll: "2502121", name: "RIJWAN AHMAD" }, { roll: "2502122", name: "ABU SUFIAN" },
-        { roll: "2502123", name: "TAIEF BIN MOHSIN" }, { roll: "2502124", name: "MD. FAHIM SADIK" },
-        { roll: "2502125", name: "ATHAI HABIBA" }, { roll: "2502126", name: "MST. ANIKA TAHSIN" },
-        { roll: "2502127", name: "KAZI NAFIZUR RAHMAN" }, { roll: "2502128", name: "IFTEKHAR AL SAMI" },
-        { roll: "2502129", name: "NOWSEN MOTIN NOWREEN" }, { roll: "2502130", name: "MD. TASEEN MOSHAROF" },
-        { roll: "2502131", name: "MD. MEHEDI HASAN SOIKOT" }, { roll: "2502132", name: "SHAHEDUL ALAM TAHASIN" },
-        { roll: "2502133", name: "MD. MOSTAFIZUR SARKER" }, { roll: "2502134", name: "SHUVAJIT DWARI" },
-        { roll: "2502135", name: "MD. NAZMUL HOSSAIN MOLLIK" }, { roll: "2502136", name: "KHAIRUL AMIN SIDDIQI" },
-        { roll: "2502137", name: "HAMIM AL WAHID AWON" }, { roll: "2502138", name: "MD. NAFIS IQBAL" },
-        { roll: "2502139", name: "TAKIAN ALI KHAN MAHADI" }, { roll: "2502140", name: "MD. SABBIR AHMMAD" },
-        { roll: "2502141", name: "SPONDON CHAKRABORTY UTSHO" }, { roll: "2502142", name: "ASHRAFUL ISLAM TONOY" },
-        { roll: "2502143", name: "SHAMS EHSAN" }, { roll: "2502144", name: "MD. ABDULLAH AL SHAFI" },
-        { roll: "2502145", name: "SABBIR HOSSAIN SAIF" }, { roll: "2502146", name: "MD. DAIYAN SAJJAD SHIFAT" },
-        { roll: "2502147", name: "MANISH KANTI DAS" }, { roll: "2502148", name: "MD. ADNAN MAHI" },
-        { roll: "2502149", name: "MD. RUPOM KHAN" }, { roll: "2502150", name: "SHANTO DEY" },
-        { roll: "2502151", name: "MD. SADMAN SAKIB" }, { roll: "2502152", name: "AFNANUL HUDA AFNAN" },
-        { roll: "2502153", name: "K. M. NAZMUS SAKIB SEUM" }, { roll: "2502154", name: "AVIK BHATTACHARJEE" },
-        { roll: "2502155", name: "TAHMID SHUVO" }, { roll: "2502156", name: "MD. MURSALIN SHEIKH" },
-        { roll: "2502157", name: "TANVIR RAHMAN SAKIB" }, { roll: "2502158", name: "Q. A. M. SHAHRIAR ARANYA" },
-        { roll: "2502159", name: "JAHID EKBAL JEHAN" }, { roll: "2502160", name: "MD. MASHFIR RISHAN CHOWDHURY" },
-        { roll: "2502161", name: "TAHMID WADI" }, { roll: "2502162", name: "APON SAHA" },
-        { roll: "2502163", name: "SWAPNO BARSHAN DAS" }, { roll: "2502164", name: "MD. ARIF HASNAT SAHIB" },
-        { roll: "2502165", name: "AL MUSABBIR HOSSAIN" }, { roll: "2502166", name: "MOHAMMAD MAHIR LABIB" },
-        { roll: "2502167", name: "RADIAT RAHMAN" }, { roll: "2502168", name: "AHANAF RAYEED" },
-        { roll: "2502169", name: "MD. TANZIM SAZID BHUIYAN" }, { roll: "2502170", name: "MD. RAKIB KHAN" },
-        { roll: "2502171", name: "MD. SAMIN YEASAR ABID" }, { roll: "2502172", name: "MOONTAHA ZAMAN MUNA" },
-        { roll: "2502173", name: "KHAYRUL ALAM RATUL" }, { roll: "2502174", name: "MD NURUL AFSAR NIHAL" },
-        { roll: "2502175", name: "MD. MEHEDI HASAN" }, { roll: "2502176", name: "SOIKAT CHOWDHURY" },
-        { roll: "2502177", name: "RIAZUR RAHMAN LABIB" }, { roll: "2502178", name: "RAHIB IRTIZ BHUIYAN" },
-        { roll: "2502179", name: "MD. ARIAN RAHMAN" }, { roll: "2502180", name: "MD. JAHURUL ISLAM TUSHAR" }
-    ];
+       // ১৮০ জন স্টুডেন্টের ডাটাবেস
+const students = [
+    { roll: "2502001", name: "ATIQ FAIYAZ RAHMAN" }, { roll: "2502002", name: "FARHAN SADIK SIAM" },
+    { roll: "2502003", name: "SALMAN AZIZ MAHI" }, { roll: "2502004", name: "TASNIM ALAM SHUVRO" },
+    { roll: "2502005", name: "MD. MAHADI HASSAN BHUIYAN" }, { roll: "2502006", name: "TASNIA AHMED" },
+    { roll: "2502007", name: "MD. OMAR FARUQUE" }, { roll: "2502008", name: "RHIJU DHAR" },
+    { roll: "2502009", name: "EAMIN MAHMUD" }, { roll: "2502010", name: "ABRAR FAIYAZ" },
+    { roll: "2502011", name: "SHAIFUL ISLAM" }, { roll: "2502012", name: "MD. EHASANUL HAQUE SHIHAB" },
+    { roll: "2502013", name: "MD. ABDULLAH HAQUE EMON" }, { roll: "2502014", name: "MD. MUHTASIN ISLAM SAMIN" },
+    { roll: "2502015", name: "THASUN HANEEN" }, { roll: "2502016", name: "MD. NUSAIB-UL ISLAM" },
+    { roll: "2502017", name: "SAKIB AHMED SOJOL" }, { roll: "2502018", name: "ANUPOM CHANDA AURGO" },
+    { roll: "2502019", name: "EKHTIAR UDDIN AHMED" }, { roll: "2502020", name: "MAINUL ISLAM KHAN SHAHAD" },
+    { roll: "2502021", name: "MD. MAHMUD HASAN MAFI" }, { roll: "2502022", name: "DIPON MONDAL" },
+    { roll: "2502023", name: "ARAFAT ISLAM" }, { roll: "2502024", name: "FAHIMUL HABIB" },
+    { roll: "2502025", name: "RAIHAN HOSSAIN" }, { roll: "2502026", name: "JUBAYER AHMED" },
+    { roll: "2502027", name: "ANTARA SAHA" }, { roll: "2502028", name: "EHSANUL KABIR" },
+    { roll: "2502029", name: "MAHID KHAN" }, { roll: "2502030", name: "PRITUL DEVNATH" },
+    { roll: "2502031", name: "TOHA ISLAM" }, { roll: "2502032", name: "FARHANA ALAM" },
+    { roll: "2502033", name: "MUNTASIR MAHBUB" }, { roll: "2502034", name: "MD. NAIMUR RAHMAN" },
+    { roll: "2502035", name: "MAHIR MAHAMUD" }, { roll: "2502036", name: "MD. NAIM HOSSAIN" },
+    { roll: "2502037", name: "SWARNIL BANIK" }, { roll: "2502038", name: "TASIN AHAMMED RAFI" },
+    { roll: "2502039", name: "NOOR REJWAN KHAN OMI" }, { roll: "2502040", name: "TOUFICA JAHAN" },
+    { roll: "2502041", name: "MD. TAREK" }, { roll: "2502042", name: "RAFYET ULLAH SANI" },
+    { roll: "2502043", name: "SOUVIK ACHARJEE" }, { roll: "2502044", name: "MD. HASAN MAHAMUD" },
+    { roll: "2502045", name: "TANVIR MAHTAB APURBA" }, { roll: "2502046", name: "MD. SIFAT AHMED" },
+    { roll: "2502047", name: "TAUHIDUL ISLAM TAMIM" }, { roll: "2502048", name: "MD. MASRUR IRTISUM" },
+    { roll: "2502049", name: "MD. MAHDI HASAN" }, { roll: "2502050", name: "FARDIN SARDAR" },
+    { roll: "2502051", name: "MD. FAYYAZ ZAMAN" }, { roll: "2502052", name: "ALIF MAHMUD" },
+    { roll: "2502053", name: "SUNBIN AHMED" }, { roll: "2502054", name: "ABDULLAH" },
+    { roll: "2502055", name: "MD. MUSHFIQUE SAD AKIB" }, { roll: "2502056", name: "PONUEL PRITOM ROY" },
+    { roll: "2502057", name: "MD. MASUM AL IMRAN" }, { roll: "2502058", name: "JUNAID JAMAL TASIN" },
+    { roll: "2502059", name: "MD. YASIN KAZI" }, { roll: "2502060", name: "TAOFIQUL ISLAM RUPOM" },
+    { roll: "2502061", name: "S. M. IFTEKHAR ALAM TANVIR" }, { roll: "2502062", name: "ABDULLAH AL AZIZ" },
+    { roll: "2502063", name: "AFIAH MUBASHSHIRAH" }, { roll: "2502064", name: "SUMITA BINTE HABIB SNEHA" },
+    { roll: "2502065", name: "MD. SALEH UDDIN ZOBAYER" }, { roll: "2502066", name: "MD. ALL EMRAN" },
+    { roll: "2502067", name: "ZAHEDUR RAFSAN" }, { roll: "2502068", name: "REYAD AHMED SARKER" },
+    { roll: "2502069", name: "NAZIR SHAVRY RUSHAD" }, { roll: "2502070", name: "JAOWAD SADMAN CHOWDHURY" },
+    { roll: "2502071", name: "SAAD GIFARY" }, { roll: "2502072", name: "MD. MASRAFI RAHMAN JIHAD" },
+    { roll: "2502073", name: "ISTIAQUE AHMMAD TUSHER" }, { roll: "2502074", name: "MD. ARIF HASNAT MAHIN" },
+    { roll: "2502075", name: "MD. AL-AMIN KHAN" }, { roll: "2502076", name: "MUHAIMIN ISLAM AHON" },
+    { roll: "2502077", name: "SAJEDUL ALAM SADI" }, { roll: "2502078", name: "ADITTYA BISWAS" },
+    { roll: "2502079", name: "MD. ALAMIN HOSSAIN" }, { roll: "2502080", name: "ANAMUL HUQUE SOUROV" },
+    { roll: "2502081", name: "AFIF AHMED" }, { roll: "2502082", name: "MD. PARVEZ MIAH" },
+    { roll: "2502083", name: "AORPON ROY" }, { roll: "2502084", name: "MD. ZAHID HASSAN" },
+    { roll: "2502085", name: "NABENDU MONDAL" }, { roll: "2502086", name: "MD. FARHAN SABA" },
+    { roll: "2502087", name: "MD. SOHAN ALAM BADHON" }, { roll: "2502088", name: "AROUP DEVNATH" },
+    { roll: "2502089", name: "MAHMUDUL SIKDER LABIB" }, { roll: "2502090", name: "MD. SHAMSUZZAMAN PATOWARI" },
+    { roll: "2502091", name: "MD. SHADHIN HOSSAIN" }, { roll: "2502092", name: "AHNAF AKIF" },
+    { roll: "2502093", name: "AHNAF IQBAL" }, { roll: "2502094", name: "LAMIM MAHMUD BORNO" },
+    { roll: "2502095", name: "KAZI AHNAF MUSTAFIZ" }, { roll: "2502096", name: "HIMEL SARKER" },
+    { roll: "2502097", name: "KAZI SAYEED AHSAN" }, { roll: "2502098", name: "AMRIT ROY" },
+    { roll: "2502099", name: "MD. ALIAR AHMED" }, { roll: "2502100", name: "MD. RUBEL HOSSAIN" },
+    { roll: "2502101", name: "MUJAKKIR HOSSAIN" }, { roll: "2502102", name: "MD. NAHIAN ISLAM" },
+    { roll: "2502103", name: "AFIA FARZANA KHAN PRITHA" }, { roll: "2502104", name: "MD. IFTIKHAR OLIULLAH" },
+    { roll: "2502105", name: "ABDUS SAMAD" }, { roll: "2502106", name: "ABDUR RAHIM" },
+    { roll: "2502107", name: "SHAHRIAR KUDDUS" }, { roll: "2502108", name: "MD. MAHMUDUR RAHMAN" },
+    { roll: "2502109", name: "SHADHIN KUMAR SHIKDER" }, { roll: "2502110", name: "FABIHA MONIR PRATHAMA" },
+    { roll: "2502111", name: "MD. HASIBUL HOSSAIN" }, { roll: "2502112", name: "MD. RAHIK TANHA" },
+    { roll: "2502113", name: "MD. NAFI-UL-ISLAM" }, { roll: "2502114", name: "MAHIR AHNAF ISLAM MUGDHO" },
+    { roll: "2502115", name: "TAFSAN ISLAM SANJI" }, { roll: "2502116", name: "MD. GOLAM KIBRIYA" },
+    { roll: "2502117", name: "UMME ATIKA" }, { roll: "2502118", name: "MD. MAHAFUJ AHAMED MAFI" },
+    { roll: "2502119", name: "SHREE KASHOB DEV" }, { roll: "2502120", name: "MAHFUJA FARIHA" },
+    { roll: "2502121", name: "RIJWAN AHMAD" }, { roll: "2502122", name: "ABU SUFIAN" },
+    { roll: "2502123", name: "TAIEF BIN MOHSIN" }, { roll: "2502124", name: "MD. FAHIM SADIK" },
+    { roll: "2502125", name: "ATHAI HABIBA" }, { roll: "2502126", name: "MST. ANIKA TAHSIN" },
+    { roll: "2502127", name: "KAZI NAFIZUR RAHMAN" }, { roll: "2502128", name: "IFTEKHAR AL SAMI" },
+    { roll: "2502129", name: "NOWSEN MOTIN NOWREEN" }, { roll: "2502130", name: "MD. TASEEN MOSHAROF" },
+    { roll: "2502131", name: "MD. MEHEDI HASAN SOIKOT" }, { roll: "2502132", name: "SHAHEDUL ALAM TAHASIN" },
+    { roll: "2502133", name: "MD. MOSTAFIZUR SARKER" }, { roll: "2502134", name: "SHUVAJIT DWARI" },
+    { roll: "2502135", name: "MD. NAZMUL HOSSAIN MOLLIK" }, { roll: "2502136", name: "KHAIRUL AMIN SIDDIQI" },
+    { roll: "2502137", name: "HAMIM AL WAHID AWON" }, { roll: "2502138", name: "MD. NAFIS IQBAL" },
+    { roll: "2502139", name: "TAKIAN ALI KHAN MAHADI" }, { roll: "2502140", name: "MD. SABBIR AHMMAD" },
+    { roll: "2502141", name: "SPONDON CHAKRABORTY UTSHO" }, { roll: "2502142", name: "ASHRAFUL ISLAM TONOY" },
+    { roll: "2502143", name: "SHAMS EHSAN" }, { roll: "2502144", name: "MD. ABDULLAH AL SHAFI" },
+    { roll: "2502145", name: "SABBIR HOSSAIN SAIF" }, { roll: "2502146", name: "MD. DAIYAN SAJJAD SHIFAT" },
+    { roll: "2502147", name: "MANISH KANTI DAS" }, { roll: "2502148", name: "MD. ADNAN MAHI" },
+    { roll: "2502149", name: "MD. RUPOM KHAN" }, { roll: "2502150", name: "SHANTO DEY" },
+    { roll: "2502151", name: "MD. SADMAN SAKIB" }, { roll: "2502152", name: "AFNANUL HUDA AFNAN" },
+    { roll: "2502153", name: "K. M. NAZMUS SAKIB SEUM" }, { roll: "2502154", name: "AVIK BHATTACHARJEE" },
+    { roll: "2502155", name: "TAHMID SHUVO" }, { roll: "2502156", name: "MD. MURSALIN SHEIKH" },
+    { roll: "2502157", name: "TANVIR RAHMAN SAKIB" }, { roll: "2502158", name: "Q. A. M. SHAHRIAR ARANYA" },
+    { roll: "2502159", name: "JAHID EKBAL JEHAN" }, { roll: "2502160", name: "MD. MASHFIR RISHAN CHOWDHURY" },
+    { roll: "2502161", name: "TAHMID WADI" }, { roll: "2502162", name: "APON SAHA" },
+    { roll: "2502163", name: "SWAPNO BARSHAN DAS" }, { roll: "2502164", name: "MD. ARIF HASNAT SAHIB" },
+    { roll: "2502165", name: "AL MUSABBIR HOSSAIN" }, { roll: "2502166", name: "MOHAMMAD MAHIR LABIB" },
+    { roll: "2502167", name: "RADIAT RAHMAN" }, { roll: "2502168", name: "AHANAF RAYEED" },
+    { roll: "2502169", name: "MD. TANZIM SAZID BHUIYAN" }, { roll: "2502170", name: "MD. RAKIB KHAN" },
+    { roll: "2502171", name: "MD. SAMIN YEASAR ABID" }, { roll: "2502172", name: "MOONTAHA ZAMAN MUNA" },
+    { roll: "2502173", name: "KHAYRUL ALAM RATUL" }, { roll: "2502174", name: "MD NURUL AFSAR NIHAL" },
+    { roll: "2502175", name: "MD. MEHEDI HASAN" }, { roll: "2502176", name: "SOIKAT CHOWDHURY" },
+    { roll: "2502177", name: "RIAZUR RAHMAN LABIB" }, { roll: "2502178", name: "RAHIB IRTIZ BHUIYAN" },
+    { roll: "2502179", name: "MD. ARIAN RAHMAN" }, { roll: "2502180", name: "MD. JAHURUL ISLAM TUSHAR" }
+];
 
-    function showContent(id) {
-        document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
-        document.getElementById(id).style.display = 'block';
-        if(id === 'family') generateCards();
-    }
+function generateFamilyCards() {
+    const grid = document.getElementById('studentsGrid');
+    grid.innerHTML = students.map(s => `
+        <div class="student-card">
+            <div class="avatar">${s.name[0]}</div>
+            <h4>${s.name}</h4>
+            <p>Roll: ${s.roll}</p>
+            <a href="#" target="_blank" style="color: #6c5ce7; font-size: 20px;">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+    `).join('');
+}
+    ];
 
     function generateCards() {
         const grid = document.getElementById('studentsGrid');
         grid.innerHTML = students.map(s => `
             <div class="student-card">
-                <div class="avatar">${s.name[0]}</div>
-                <h4>${s.name}</h4>
-                <p>Roll: ${s.roll}</p>
-                <a href="#" target="_blank" style="color: #6c5ce7; font-size: 24px;">
-                    <i class="fab fa-facebook"></i>
-                </a>
+                <div class="avatar">${s.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+                <strong>${s.name}</strong>
+                <p style="font-size: 0.9em; color: #888;">Roll: ${s.roll}</p>
+                <a href="#" class="profile-btn"><i class="fab fa-facebook"></i> Visit Profile</a>
             </div>
         `).join('');
     }
-
+    
     function filter() {
         const val = document.getElementById('search').value.toLowerCase();
         document.querySelectorAll('.student-card').forEach(card => {
             card.style.display = card.innerText.toLowerCase().includes(val) ? '' : 'none';
         });
     }
+
+    generateCards();
 </script>
 </body>
 </html>
