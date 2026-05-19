@@ -31,6 +31,24 @@
             background-size: 50px 50px;
         }
 
+        /* মেকানিক্যাল ব্যাকগ্রাউন্ড ক্যানভাস সিএসএস */
+        #mechanical-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* কন্টেন্টের পেছনে রাখার জন্য */
+            background: #0b0c10; 
+            pointer-events: none; /* যেন বাটনে বা কার্ডে ক্লিক করতে সমস্যা না হয় */
+        }
+
+        /* কার্ডের ব্যাকগ্রাউন্ড হালকা ট্রান্সপারেন্ট করা যেন পেছনের ডিভাইসগুলো দেখা যায় */
+        .family-grid .student-card {
+            background: rgba(31, 40, 51, 0.65) !important;
+            backdrop-filter: blur(8px); /* গ্লাস-মরফিজম ইফেক্ট */
+        }
+
         header {
             text-align: center;
             padding: 40px 20px;
@@ -256,6 +274,8 @@
 </head>
 <body>
 
+    <canvas id="mechanical-bg"></canvas>
+
     <header>
         <div class="dept-tag">RUET ME'25</div>
         <h1>Academic Resource Portal</h1>
@@ -270,19 +290,14 @@
         <a href="https://www.me.ruet.ac.bd/" target="_blank" class="tab-btn">Latest Notices</a>
         <a href="#" class="tab-btn">Class Notes & Resources</a>
         <a href="#" class="tab-btn active">Our Family</a>
-    </div>
-
-    <div class="section-title">Section A</div>
-    <div class="family-grid" id="sectionA-grid">
-        </div>
+    </header> <div class="section-title">Section A</div>
+    <div class="family-grid" id="sectionA-grid"></div>
 
     <div class="section-title">Section B</div>
-    <div class="family-grid" id="sectionB-grid">
-        </div>
+    <div class="family-grid" id="sectionB-grid"></div>
 
     <div class="section-title">Section C</div>
-    <div class="family-grid" id="sectionC-grid">
-        </div>
+    <div class="family-grid" id="sectionC-grid"></div>
 
     <footer>
         <p>2026 &copy; All rights reserved</p>
@@ -479,7 +494,7 @@
             { roll: "2502180", name: "MD. JAHURUL ISLAM TUSHAR", sec: "C" }
         ];
 
-        // Helper function to extract initials for avatar circles (e.g. "Farhan Sadik Siam" -> "FS")
+        // Helper function to extract initials for avatar circles
         function getInitials(name) {
             let clean = name.replace(/MD\.|MST\./gi, '').trim();
             let tokens = clean.split(' ').filter(t => t.length > 0);
@@ -529,6 +544,124 @@
 
         // Initial paint execution
         displayStudents(students);
+
+
+        // ==========================================
+        //  মেকানিক্যাল এনিমেশন ক্যানভাস লজিক 
+        // ==========================================
+        const canvas = document.getElementById('mechanical-bg');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        const deviceTypes = ['car', 'jet', 'ship', 'rocket', 'gear'];
+
+        class MechanicalDevice {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height; 
+            }
+
+            reset() {
+                this.x = -100; 
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 30 + 20; 
+                this.speed = Math.random() * 1 + 0.5; 
+                this.type = deviceTypes[Math.floor(Math.random() * deviceTypes.length)];
+                this.opacity = Math.random() * 0.15 + 0.05; 
+            }
+
+            update() {
+                this.x += this.speed; 
+                if (this.x > canvas.width + 100) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.fillStyle = `rgba(102, 252, 241, ${this.opacity})`; 
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = '#66fcf1';
+
+                ctx.beginPath();
+                if (this.type === 'car') {
+                    ctx.fillRect(0, 10, this.size, this.size / 2.5);
+                    ctx.fillRect(this.size * 0.2, 0, this.size * 0.5, this.size / 2.5);
+                    ctx.fillStyle = `rgba(31, 40, 51, ${this.opacity})`;
+                    ctx.arc(this.size * 0.25, 10 + this.size / 2.5, 4, 0, Math.PI * 2);
+                    ctx.arc(this.size * 0.75, 10 + this.size / 2.5, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                } 
+                else if (this.type === 'jet') {
+                    ctx.moveTo(this.size, 0);
+                    ctx.lineTo(0, -this.size/3);
+                    ctx.lineTo(this.size*0.2, -this.size/1.5);
+                    ctx.lineTo(this.size*0.4, -this.size/3);
+                    ctx.lineTo(0, 0);
+                    ctx.lineTo(this.size*0.4, this.size/3);
+                    ctx.lineTo(this.size*0.2, this.size/1.5);
+                    ctx.lineTo(0, this.size/3);
+                    ctx.closePath();
+                    ctx.fill();
+                } 
+                else if (this.type === 'ship') {
+                    ctx.moveTo(0, 0);
+                    ctx.lineTo(this.size * 0.8, 0);
+                    ctx.lineTo(this.size, -this.size * 0.3);
+                    ctx.lineTo(this.size * 0.9, -this.size * 0.5);
+                    ctx.lineTo(this.size * 0.2, -this.size * 0.5);
+                    ctx.closePath();
+                    ctx.fill();
+                } 
+                else if (this.type === 'rocket') {
+                    ctx.arc(0, 0, this.size/4, Math.PI/2, -Math.PI/2, true);
+                    ctx.lineTo(-this.size, -this.size/4);
+                    ctx.lineTo(-this.size - 5, -this.size/2);
+                    ctx.lineTo(-this.size + 5, 0);
+                    ctx.lineTo(-this.size - 5, this.size/2);
+                    ctx.lineTo(-this.size, this.size/4);
+                    ctx.closePath();
+                    ctx.fill();
+                }
+                else if (this.type === 'gear') {
+                    ctx.rotate((this.x * 0.02)); 
+                    for (let i = 0; i < 8; i++) {
+                        ctx.rotate(Math.PI / 4);
+                        ctx.fillRect(-this.size/8, -this.size/2, this.size/4, this.size/2);
+                    }
+                    ctx.arc(0, 0, this.size/3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        const devicesArray = [];
+        const numberOfDevices = 15;
+
+        for (let i = 0; i < numberOfDevices; i++) {
+            devicesArray.push(new MechanicalDevice());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            devicesArray.forEach(device => {
+                device.update();
+                device.draw();
+            });
+            
+            requestAnimationFrame(animate);
+        }
+
+        animate();
     </script>
 </body>
 </html>
