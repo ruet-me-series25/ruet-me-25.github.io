@@ -5,6 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RUET ME '25 Academic Resource Portal</title>
     <style>
+        /* মেইন কন্টেইনার যাতে সবগুলোকে আলাদা রাখে */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* প্রতিটি সেকশনকে আলাদা করার জন্য */
+.section-wrapper {
+    margin-bottom: 50px; /* Section A এবং B এর মাঝে জায়গা তৈরি করবে */
+    width: 100%;
+}
+
+.section-title {
+    color: #4d96ff;
+    font-size: 1.5rem;
+    margin: 30px 0 20px 0;
+    text-transform: uppercase;
+    border-bottom: 2px solid #4d96ff;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/* গ্রিড লেআউট ফিক্স */
+.family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+}
         :root {
             --bg-color: #0b0c10;
             --accent-purple: #8a2be2;
