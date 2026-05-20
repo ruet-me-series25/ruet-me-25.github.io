@@ -9,6 +9,7 @@
 :root{
   --bg:#04060f;--card:rgba(8,13,32,0.88);
   --accent:#00d4ff;--accent2:#7c3aed;--accent3:#f97316;
+  --green:#10b981;
   --text:#e2e8f0;--muted:#94a3b8;--border:rgba(0,212,255,0.18);
   --glow:0 0 24px rgba(0,212,255,0.25);
 }
@@ -32,29 +33,59 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,6,15,0.93);backdrop-filt
 .tab{background:transparent;border:1.5px solid rgba(255,255,255,0.15);border-radius:30px;color:var(--muted);font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;padding:7px 18px;cursor:pointer;transition:all .22s;letter-spacing:.5px;}
 .tab:hover{border-color:var(--accent);color:var(--accent);}
 .tab.active{background:linear-gradient(90deg,var(--accent),#0090ff);border-color:transparent;color:#04060f;font-weight:700;box-shadow:0 0 18px rgba(0,212,255,0.4);}
-.section{display:none;position:relative;z-index:5;max-width:900px;margin:0 auto;padding:36px 20px 80px;}
+.section{display:none;position:relative;z-index:5;max-width:960px;margin:0 auto;padding:36px 20px 100px;}
 .section.active{display:block;}
 .sec-heading{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;letter-spacing:3px;color:var(--accent);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
 .sec-heading::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);}
 .count-badge{background:rgba(0,212,255,0.1);border:1px solid var(--accent);border-radius:20px;font-size:11px;font-weight:600;padding:2px 12px;color:var(--accent);font-family:'Share Tech Mono',monospace;white-space:nowrap;}
-/* NOTICES */
+
+/* ===== NOTICE CATEGORIES ===== */
+.notice-cats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
+.ncat-btn{background:rgba(255,255,255,0.04);border:1.5px solid var(--border);border-radius:10px;color:var(--muted);font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;padding:10px 18px;cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:8px;position:relative;}
+.ncat-btn:hover{border-color:var(--accent);color:var(--accent);}
+.ncat-btn.active{border-color:var(--accent2);color:#fff;background:rgba(124,58,237,0.18);}
+.ncat-btn svg{width:16px;height:16px;flex-shrink:0;}
+.ncat-btn .arrow{margin-left:4px;font-size:10px;transition:transform .2s;}
+.ncat-btn.open .arrow{transform:rotate(180deg);}
+/* WhatsApp dropdown */
+.wa-dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:200px;background:rgba(10,14,35,0.98);border:1px solid var(--border);border-radius:10px;z-index:50;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,0.5);}
+.ncat-btn.open .wa-dropdown{display:block;}
+.wa-item{display:flex;align-items:center;gap:10px;padding:11px 16px;color:var(--text);font-size:14px;font-weight:600;text-decoration:none;transition:background .18s;}
+.wa-item:hover{background:rgba(124,58,237,0.2);color:#fff;}
+.wa-item .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.dot-a{background:var(--accent);}
+.dot-b{background:#a78bfa;}
+.dot-c{background:var(--accent3);}
+
+/* Notice panels */
+.notice-panel{display:none;}
+.notice-panel.active{display:block;}
 .notice-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:10px;padding:22px 24px;margin-bottom:14px;transition:all .22s;animation:fadeUp .4s ease both;}
 .notice-card:hover{border-left-color:var(--accent);box-shadow:var(--glow);transform:translateX(4px);}
 .notice-date{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1.5px;margin-bottom:8px;}
 .notice-title{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3;}
 .notice-link{color:var(--accent);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.5px;}
 .notice-link:hover{color:#fff;}
-/* RESOURCES */
-.res-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
-.res-table thead tr{background:rgba(124,58,237,0.18);border-bottom:1px solid var(--border);}
-.res-table th{font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted);padding:14px 18px;text-align:left;}
-.res-table td{padding:13px 18px;border-bottom:1px solid rgba(255,255,255,0.05);font-size:15px;font-weight:500;}
-.res-table tr:last-child td{border-bottom:none;}
-.res-table tbody tr:hover td{background:rgba(0,212,255,0.04);}
-.res-link{color:var(--accent);font-weight:700;text-decoration:none;font-size:13px;}
-.res-link:hover{color:#fff;}
-.res-link.pdf{color:var(--accent3);}
-/* FAMILY */
+.ext-link-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;animation:fadeUp .4s ease both;}
+.ext-link-card:hover{box-shadow:var(--glow);}
+.ext-link-label{font-size:16px;font-weight:700;}
+.ext-link-sub{font-size:12px;color:var(--muted);margin-top:3px;}
+.btn-visit{background:linear-gradient(90deg,var(--accent2),#4f46e5);border:none;border-radius:8px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;padding:8px 18px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:all .2s;}
+.btn-visit:hover{opacity:.85;transform:translateY(-1px);}
+
+/* ===== DRIVE CARDS ===== */
+.drive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:30px;}
+.drive-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;text-align:center;text-decoration:none;color:var(--text);transition:all .25s;animation:fadeUp .4s ease both;display:block;}
+.drive-card:hover{border-color:var(--accent);box-shadow:var(--glow);transform:translateY(-4px);}
+.drive-icon{font-size:36px;margin-bottom:12px;}
+.drive-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;margin-bottom:4px;}
+.drive-sub{font-size:12px;color:var(--muted);}
+.drive-card.sec-a-card{border-top:3px solid var(--accent);}
+.drive-card.sec-b-card{border-top:3px solid #7c3aed;}
+.drive-card.sec-c-card{border-top:3px solid var(--accent3);}
+.drive-card.res-card{border-top:3px solid var(--green);}
+
+/* ===== FAMILY ===== */
 .section-sub{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
 .sec-filter{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:20px;color:var(--muted);font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;padding:5px 16px;cursor:pointer;transition:all .2s;}
 .sec-filter.active,.sec-filter:hover{background:var(--accent2);border-color:var(--accent2);color:#fff;}
@@ -73,23 +104,34 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,6,15,0.93);backdrop-filt
 .av2{background:rgba(249,115,22,0.1);border-color:var(--accent3);color:var(--accent3);}
 .av3{background:rgba(16,185,129,0.1);border-color:#10b981;color:#34d399;}
 .av4{background:rgba(236,72,153,0.1);border-color:#ec4899;color:#f472b6;}
-footer{position:relative;z-index:5;text-align:center;padding:22px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;font-family:'Share Tech Mono',monospace;}
+
+/* ===== FOOTER ===== */
+footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;font-family:'Share Tech Mono',monospace;}
+.footer-main{margin-bottom:6px;}
+.footer-dev{font-size:10px;color:rgba(148,163,184,0.55);margin-top:5px;}
+.footer-dev a{color:rgba(124,58,237,0.7);text-decoration:none;transition:color .2s;}
+.footer-dev a:hover{color:#a78bfa;}
+
+/* ===== CONTACT FAB ===== */
 .contact-fab{position:fixed;bottom:26px;right:26px;z-index:200;background:linear-gradient(135deg,var(--accent2),#4f46e5);border:none;border-radius:30px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;padding:11px 20px;cursor:pointer;box-shadow:0 4px 24px rgba(124,58,237,0.5);display:flex;align-items:center;gap:8px;transition:all .22s;text-decoration:none;}
 .contact-fab:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,58,237,0.65);}
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
 <canvas id="bgCanvas"></canvas>
+
 <header>
   <div class="brand-badge">RUET ME'25</div>
   <h1>Academic Resource Portal</h1>
   <p>Official Notices, Course Materials &amp; Updates &nbsp;·&nbsp; Dept. of Mechanical Engineering</p>
   <div class="divider"></div>
 </header>
+
 <nav>
   <div class="search-row">
-    <input type="text" id="searchInput" placeholder="Search in Latest Notices...">
+    <input type="text" id="searchInput" placeholder="Search...">
     <button class="btn-search" onclick="doSearch()">SEARCH</button>
   </div>
   <div class="tabs">
@@ -99,36 +141,113 @@ footer{position:relative;z-index:5;text-align:center;padding:22px;border-top:1px
   </div>
 </nav>
 
-<!-- NOTICES -->
+<!-- ===== NOTICES ===== -->
 <section class="section active" id="sec-notices">
   <div class="sec-heading">LATEST NOTICES</div>
-  <div class="notice-card"><div class="notice-date">MAY 18, 2026</div><div class="notice-title">1st Year Odd Semester Class Routine – Session 2025-2026</div><a href="#" class="notice-link">Download Notice (PDF)</a></div>
-  <div class="notice-card"><div class="notice-date">MAY 10, 2026</div><div class="notice-title">Lab Schedule – Mechanical Engineering Department</div><a href="#" class="notice-link">Download Notice (PDF)</a></div>
-  <div class="notice-card"><div class="notice-date">APRIL 28, 2026</div><div class="notice-title">Departmental Notice: ID Card Collection</div><a href="#" class="notice-link">Download Notice (PDF)</a></div>
-  <div class="notice-card"><div class="notice-date">APRIL 15, 2026</div><div class="notice-title">Section Allocation – A, B &amp; C (Roll 2502001–2502180)</div><a href="#" class="notice-link">Download Notice (PDF)</a></div>
-  <div class="notice-card"><div class="notice-date">MARCH 20, 2026</div><div class="notice-title">Orientation Program for RUET ME'25 Batch</div><a href="#" class="notice-link">Download Notice (PDF)</a></div>
-  <div class="notice-card"><div class="notice-date">MARCH 12, 2026</div><div class="notice-title">Admission Finalization Notice – Mechanical Engineering</div><a href="#" class="notice-link">Download Notice (PDF)</a></div>
+
+  <!-- Category buttons -->
+  <div class="notice-cats">
+    <button class="ncat-btn active" onclick="showNoticePanel('me',this)" id="ncat-me">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      ME Dept. Notice
+    </button>
+    <button class="ncat-btn" onclick="showNoticePanel('uni',this)" id="ncat-uni">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+      University Notice
+    </button>
+    <button class="ncat-btn" onclick="showNoticePanel('common',this)" id="ncat-common">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Common
+    </button>
+    <!-- WhatsApp with dropdown -->
+    <button class="ncat-btn" id="ncat-wa" onclick="toggleWaDropdown(event)">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="color:#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp Notice
+      <span class="arrow">▾</span>
+      <div class="wa-dropdown" id="wa-dropdown">
+        <a class="wa-item" href="https://chat.whatsapp.com/FcNRmCdqiq3JXmd4QYOW88" target="_blank">
+          <span class="dot dot-a"></span> Section A
+        </a>
+        <a class="wa-item" href="#" target="_blank" id="wa-b-link">
+          <span class="dot dot-b"></span> Section B <span style="font-size:10px;color:var(--muted);margin-left:4px;">(coming soon)</span>
+        </a>
+        <a class="wa-item" href="#" target="_blank" id="wa-c-link">
+          <span class="dot dot-c"></span> Section C <span style="font-size:10px;color:var(--muted);margin-left:4px;">(coming soon)</span>
+        </a>
+      </div>
+    </button>
+  </div>
+
+  <!-- ME Dept Notice Panel -->
+  <div class="notice-panel active" id="panel-me">
+    <div class="ext-link-card">
+      <div>
+        <div class="ext-link-label">ME Department Official Notice Board</div>
+        <div class="ext-link-sub">me.ruet.ac.bd – Official notices from the Mechanical Engineering Department</div>
+      </div>
+      <a href="https://www.me.ruet.ac.bd/notice" target="_blank" class="btn-visit">Visit →</a>
+    </div>
+  </div>
+
+  <!-- University Notice Panel -->
+  <div class="notice-panel" id="panel-uni">
+    <div class="ext-link-card">
+      <div>
+        <div class="ext-link-label">RUET University Official Notice Board</div>
+        <div class="ext-link-sub">ruet.ac.bd – Official notices from Rajshahi University of Engineering &amp; Technology</div>
+      </div>
+      <a href="https://www.ruet.ac.bd/notice" target="_blank" class="btn-visit">Visit →</a>
+    </div>
+  </div>
+
+  <!-- Common Notice Panel -->
+<div class="notice-panel" id="panel-common">
+
+  <div class="notice-card">
+    <div class="notice-date">MAY 17, 2026</div>
+    <div class="notice-title">Student Registration Serial No.</div>
+    <a href="https://drive.google.com/file/d/1-FKE28I2DASll_mQZ_Yk-aLgK-I6QXKE/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
+  </div>
+
+</div>
 </section>
 
-<!-- RESOURCES -->
+<!-- ===== CLASS NOTES & RESOURCES ===== -->
 <section class="section" id="sec-resources">
   <div class="sec-heading">CLASS NOTES &amp; RESOURCES</div>
-  <table class="res-table">
-    <thead><tr><th>Subject</th><th>Topic</th><th>Upload Date</th><th>Action</th></tr></thead>
-    <tbody>
-      <tr><td>Course Details</td><td>Course Code, Title &amp; Credit Hours</td><td>18-May-2026</td><td><a href="#" class="res-link">View</a></td></tr>
-      <tr><td>Course Syllabus</td><td>Mechanical Engineering – 1st Year Odd</td><td>12-Mar-2026</td><td><a href="#" class="res-link pdf">Download PDF</a></td></tr>
-      <tr><td>ME Students Info</td><td>Section List, Roll Numbers &amp; Names</td><td>12-Mar-2026</td><td><a href="#" class="res-link">View</a></td></tr>
-      <tr><td>Mathematics-I</td><td>Lecture Notes – Calculus, Chapter 1 &amp; 2</td><td>05-May-2026</td><td><a href="#" class="res-link pdf">Download PDF</a></td></tr>
-      <tr><td>Physics-I</td><td>Optics, Wave Motion &amp; Modern Physics</td><td>01-May-2026</td><td><a href="#" class="res-link pdf">Download PDF</a></td></tr>
-      <tr><td>Chemistry</td><td>Electrochemistry &amp; Corrosion</td><td>28-Apr-2026</td><td><a href="#" class="res-link pdf">Download PDF</a></td></tr>
-      <tr><td>Engineering Drawing</td><td>Orthographic Projection &amp; Sectional Views</td><td>20-Apr-2026</td><td><a href="#" class="res-link">View</a></td></tr>
-      <tr><td>Mechanics</td><td>Statics &amp; Dynamics – Fundamentals</td><td>15-Apr-2026</td><td><a href="#" class="res-link pdf">Download PDF</a></td></tr>
-    </tbody>
-  </table>
+
+  <!-- Section-wise Notes -->
+  <div style="margin-bottom:10px;font-family:'Orbitron',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;">CLASS NOTES — BY SECTION</div>
+  <div class="drive-grid">
+    <a class="drive-card sec-a-card" href="https://drive.google.com/drive/folders/1BireUk6PNRXKRq64t8mFzB_4T24EfHqG?usp=drive_link" target="_blank">
+      <div class="drive-icon">📂</div>
+      <div class="drive-name">Section A</div>
+      <div class="drive-sub">Class notes &amp; materials for Section A</div>
+    </a>
+    <a class="drive-card sec-b-card" href="https://drive.google.com/drive/folders/11JdtG-dMrot-gTXkP7yew2jht9crhXAK?usp=drive_link" target="_blank">
+      <div class="drive-icon">📂</div>
+      <div class="drive-name">Section B</div>
+      <div class="drive-sub">Class notes &amp; materials for Section B</div>
+    </a>
+    <a class="drive-card sec-c-card" href="https://drive.google.com/drive/folders/1m_InpSqti9NNzPiaYbRUYZz29d_qHWVA?usp=drive_link" target="_blank">
+      <div class="drive-icon">📂</div>
+      <div class="drive-name">Section C</div>
+      <div class="drive-sub">Class notes &amp; materials for Section C</div>
+    </a>
+  </div>
+
+  <!-- Resources -->
+  <div style="margin-top:10px;margin-bottom:10px;font-family:'Orbitron',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;">RESOURCES</div>
+  <div class="drive-grid">
+    <a class="drive-card res-card" href="https://drive.google.com/drive/folders/18qCFP6b0T4jYIbxszQ9i_nbWnhSRa-GT?usp=drive_link" target="_blank">
+      <div class="drive-icon">🗂️</div>
+      <div class="drive-name">Resources</div>
+      <div class="drive-sub">Syllabus, reference books, course materials &amp; more</div>
+    </a>
+  </div>
 </section>
 
-<!-- FAMILY -->
+<!-- ===== OUR FAMILY ===== -->
 <section class="section" id="sec-family">
   <div class="sec-heading">OUR FAMILY <span class="count-badge" id="stuCount">180 Students</span></div>
   <div class="section-sub">
@@ -140,13 +259,39 @@ footer{position:relative;z-index:5;text-align:center;padding:22px;border-top:1px
   <div class="students-grid" id="studentsGrid"></div>
 </section>
 
-<footer>2026 &copy; RUET ME'25 &nbsp;·&nbsp; Department of Mechanical Engineering, RUET &nbsp;·&nbsp; All Rights Reserved</footer>
+<footer>
+  <div class="footer-main">2026 &copy; RUET ME'25 &nbsp;·&nbsp; Department of Mechanical Engineering, RUET &nbsp;·&nbsp; All Rights Reserved</div>
+  <div class="footer-dev">Developed by <a href="https://www.facebook.com/ehasanul.haque.shihab" target="_blank">Ehasanul Haque Shihab (2502012)</a></div>
+</footer>
+
 <a href="mailto:me25@ruet.ac.bd" class="contact-fab">
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
   Contact
 </a>
 
 <script>
+// ======================================================
+// NOTICE TABS
+// ======================================================
+function showNoticePanel(id, btn){
+  document.querySelectorAll('.ncat-btn').forEach(b=>{b.classList.remove('active');b.classList.remove('open');});
+  document.querySelectorAll('.notice-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-'+id).classList.add('active');
+}
+function toggleWaDropdown(e){
+  e.stopPropagation();
+  const btn=document.getElementById('ncat-wa');
+  const isOpen=btn.classList.contains('open');
+  document.querySelectorAll('.ncat-btn').forEach(b=>{b.classList.remove('active');b.classList.remove('open');});
+  document.querySelectorAll('.notice-panel').forEach(p=>p.classList.remove('active'));
+  if(!isOpen){btn.classList.add('open');btn.classList.add('active');}
+}
+document.addEventListener('click',()=>{
+  const wa=document.getElementById('ncat-wa');
+  if(wa){wa.classList.remove('open');}
+});
+
 // ======================================================
 // STUDENT DATA
 // ======================================================
@@ -335,7 +480,7 @@ const students=[
 
 const avColors=['av0','av1','av2','av3','av4'];
 function getInitials(n){
-  const skip=['Md.','Mst.','S.','M.','K.','Q.','A.','G.','Al','Al-Amin'];
+  const skip=['Md.','Mst.','S.','M.','K.','Q.','A.','G.','Al'];
   const p=n.split(' ').filter(w=>w.length>1&&!skip.includes(w));
   return p.length>=2?(p[0][0]+p[1][0]).toUpperCase():n.slice(0,2).toUpperCase();
 }
@@ -362,26 +507,26 @@ function filterSection(sec,btn){
   renderStudents(sec==='ALL'?students:students.filter(s=>s.section===sec));
 }
 
-const ph={notices:'Search in Latest Notices...',resources:'Search in Class Notes & Resources...',family:'Search in Our Family...'};
+// ======================================================
+// TAB SWITCHING
+// ======================================================
 function switchTab(id,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.getElementById('sec-'+id).classList.add('active');
-  const si=document.getElementById('searchInput');
-  si.placeholder=ph[id];si.value='';
+  document.getElementById('searchInput').value='';
 }
 
+// ======================================================
+// SEARCH
+// ======================================================
 function doSearch(){
   const q=document.getElementById('searchInput').value.toLowerCase().trim();
   const act=document.querySelector('.section.active').id;
   if(act==='sec-family'){
     renderStudents(q?students.filter(s=>s.name.toLowerCase().includes(q)||s.roll.includes(q)):students);
     document.querySelectorAll('.sec-filter').forEach((b,i)=>b.classList.toggle('active',i===0));
-  }else if(act==='sec-notices'){
-    document.querySelectorAll('.notice-card').forEach(c=>c.style.display=(!q||c.textContent.toLowerCase().includes(q))?'':'none');
-  }else{
-    document.querySelectorAll('.res-table tbody tr').forEach(r=>r.style.display=(!q||r.textContent.toLowerCase().includes(q))?'':'none');
   }
 }
 document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch();});
@@ -395,7 +540,6 @@ function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeigh
 resize();
 window.addEventListener('resize',resize);
 
-// Particles
 const pts=Array.from({length:55},()=>({
   x:Math.random()*3000,y:Math.random()*1500,
   vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,
@@ -403,7 +547,6 @@ const pts=Array.from({length:55},()=>({
   c:['rgba(0,212,255,','rgba(124,58,237,','rgba(249,115,22,'][Math.floor(Math.random()*3)]
 }));
 
-// Gears
 class Gear{
   constructor(){
     this.x=Math.random()*window.innerWidth;
@@ -436,7 +579,6 @@ class Gear{
 }
 const gears=Array.from({length:7},()=>new Gear());
 
-// Vehicle base
 class Veh{
   constructor(type){
     this.type=type;
@@ -477,21 +619,16 @@ function drawJet(x,y,sc,al,dir){
   ctx.beginPath();ctx.arc(-52,0,12,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();
   ctx.restore();
 }
-
 function drawCar(x,y,sc,al,dir){
   ctx.save();ctx.translate(x,y);ctx.scale(dir*sc,sc);ctx.globalAlpha=al;
   ctx.strokeStyle='rgba(249,115,22,0.9)';ctx.fillStyle='rgba(249,115,22,0.07)';ctx.lineWidth=1.2;
   ctx.beginPath();ctx.moveTo(-50,8);ctx.lineTo(-44,-2);ctx.lineTo(-18,-14);ctx.lineTo(22,-14);ctx.lineTo(42,-4);ctx.lineTo(50,8);ctx.closePath();ctx.fill();ctx.stroke();
   ctx.beginPath();ctx.moveTo(-16,-14);ctx.lineTo(-6,-22);ctx.lineTo(16,-22);ctx.lineTo(26,-14);ctx.closePath();ctx.fillStyle='rgba(0,212,255,0.08)';ctx.fill();ctx.stroke();
-  [[-32,8],[28,8]].forEach(([wx])=>{
-    ctx.beginPath();ctx.ellipse(wx,12,10,6,0,0,Math.PI*2);ctx.fillStyle='rgba(20,20,40,0.9)';ctx.fill();ctx.strokeStyle='rgba(200,200,255,0.35)';ctx.lineWidth=1;ctx.stroke();
-  });
-  ctx.beginPath();ctx.moveTo(44,-10);ctx.lineTo(52,-10);ctx.moveTo(48,-10);ctx.lineTo(48,-16);ctx.lineTo(38,-16);ctx.lineTo(56,-16);ctx.strokeStyle='rgba(249,115,22,0.7)';ctx.lineWidth=1;ctx.stroke();
+  [[-32,8],[28,8]].forEach(([wx])=>{ctx.beginPath();ctx.ellipse(wx,12,10,6,0,0,Math.PI*2);ctx.fillStyle='rgba(20,20,40,0.9)';ctx.fill();ctx.strokeStyle='rgba(200,200,255,0.35)';ctx.lineWidth=1;ctx.stroke();});
   const eg=ctx.createRadialGradient(-54,5,0,-54,5,16);eg.addColorStop(0,'rgba(249,115,22,0.5)');eg.addColorStop(1,'transparent');
   ctx.beginPath();ctx.arc(-54,5,13,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();
   ctx.restore();
 }
-
 function drawPlane(x,y,sc,al,dir){
   ctx.save();ctx.translate(x,y);ctx.scale(dir*sc,sc);ctx.globalAlpha=al;
   ctx.strokeStyle='rgba(124,58,237,0.9)';ctx.fillStyle='rgba(124,58,237,0.06)';ctx.lineWidth=1.1;
@@ -501,12 +638,8 @@ function drawPlane(x,y,sc,al,dir){
   ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-8,-58);ctx.lineTo(-26,-58);ctx.lineTo(-14,0);ctx.closePath();ctx.fill();ctx.stroke();
   ctx.beginPath();ctx.moveTo(-54,0);ctx.lineTo(-68,24);ctx.lineTo(-62,7);ctx.closePath();ctx.fill();ctx.stroke();
   ctx.beginPath();ctx.moveTo(-54,0);ctx.lineTo(-68,-24);ctx.lineTo(-62,-7);ctx.closePath();ctx.fill();ctx.stroke();
-  [[-22,30],[-22,-30]].forEach(([ex,ey])=>{
-    ctx.beginPath();ctx.ellipse(ex,ey,9,5,ey>0?.2:-.2,0,Math.PI*2);ctx.fillStyle='rgba(124,58,237,0.12)';ctx.fill();ctx.strokeStyle='rgba(124,58,237,0.7)';ctx.lineWidth=1;ctx.stroke();
-  });
   ctx.restore();
 }
-
 function drawRocket(x,y,sc,al){
   ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);ctx.rotate(-Math.PI/5);ctx.globalAlpha=al;
   ctx.strokeStyle='rgba(200,220,255,0.8)';ctx.fillStyle='rgba(200,220,255,0.06)';ctx.lineWidth=1.1;
@@ -518,31 +651,21 @@ function drawRocket(x,y,sc,al){
   ctx.restore();
 }
 
-const vehs=[
-  new Veh('jet'),new Veh('jet'),new Veh('jet'),
-  new Veh('plane'),new Veh('plane'),
-  new Veh('car'),new Veh('car'),new Veh('car'),
-  new Veh('rocket'),new Veh('rocket'),
-];
+const vehs=[new Veh('jet'),new Veh('jet'),new Veh('jet'),new Veh('plane'),new Veh('plane'),new Veh('car'),new Veh('car'),new Veh('car'),new Veh('rocket'),new Veh('rocket')];
 
 function animate(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  // grid
   ctx.strokeStyle='rgba(0,212,255,0.022)';ctx.lineWidth=1;
   for(let x=0;x<canvas.width;x+=90){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();}
   for(let y=0;y<canvas.height;y+=90){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();}
-  // particles
   pts.forEach(p=>{
     p.x+=p.vx;p.y+=p.vy;
     if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
     if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
     ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c+'0.55)';ctx.fill();
   });
-  // gears
   gears.forEach(g=>g.draw());
-  // vehicles
   vehs.forEach(v=>{v.update();v.draw();});
-  // glow blobs
   [[canvas.width*.1,canvas.height*.25,'rgba(124,58,237,0.025)'],[canvas.width*.85,canvas.height*.55,'rgba(0,212,255,0.022)'],[canvas.width*.5,canvas.height*.85,'rgba(249,115,22,0.018)']].forEach(([bx,by,bc])=>{
     const bg=ctx.createRadialGradient(bx,by,0,bx,by,220);bg.addColorStop(0,bc);bg.addColorStop(1,'transparent');
     ctx.beginPath();ctx.arc(bx,by,220,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();
