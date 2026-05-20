@@ -9,7 +9,7 @@
 :root{
   --bg:#04060f;--card:rgba(8,13,32,0.88);
   --accent:#00d4ff;--accent2:#7c3aed;--accent3:#f97316;
-  --green:#10b981;
+  --green:#10b981;--gold:#f59e0b;
   --text:#e2e8f0;--muted:#94a3b8;--border:rgba(0,212,255,0.18);
   --glow:0 0 24px rgba(0,212,255,0.25);
 }
@@ -39,7 +39,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,6,15,0.93);backdrop-filt
 .sec-heading::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--accent),transparent);}
 .count-badge{background:rgba(0,212,255,0.1);border:1px solid var(--accent);border-radius:20px;font-size:11px;font-weight:600;padding:2px 12px;color:var(--accent);font-family:'Share Tech Mono',monospace;white-space:nowrap;}
 
-/* ===== NOTICE CATEGORIES ===== */
+/* ===== NOTICE CATS ===== */
 .notice-cats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
 .ncat-btn{background:rgba(255,255,255,0.04);border:1.5px solid var(--border);border-radius:10px;color:var(--muted);font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:600;padding:10px 18px;cursor:pointer;transition:all .22s;display:flex;align-items:center;gap:8px;position:relative;}
 .ncat-btn:hover{border-color:var(--accent);color:var(--accent);}
@@ -47,8 +47,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,6,15,0.93);backdrop-filt
 .ncat-btn svg{width:16px;height:16px;flex-shrink:0;}
 .ncat-btn .arrow{margin-left:4px;font-size:10px;transition:transform .2s;}
 .ncat-btn.open .arrow{transform:rotate(180deg);}
-/* WhatsApp dropdown */
-.wa-dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:200px;background:rgba(10,14,35,0.98);border:1px solid var(--border);border-radius:10px;z-index:50;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,0.5);}
+.wa-dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:210px;background:rgba(10,14,35,0.98);border:1px solid var(--border);border-radius:10px;z-index:50;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,0.5);}
 .ncat-btn.open .wa-dropdown{display:block;}
 .wa-item{display:flex;align-items:center;gap:10px;padding:11px 16px;color:var(--text);font-size:14px;font-weight:600;text-decoration:none;transition:background .18s;}
 .wa-item:hover{background:rgba(124,58,237,0.2);color:#fff;}
@@ -56,8 +55,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,6,15,0.93);backdrop-filt
 .dot-a{background:var(--accent);}
 .dot-b{background:#a78bfa;}
 .dot-c{background:var(--accent3);}
-
-/* Notice panels */
+.dot-ts{background:var(--green);}
 .notice-panel{display:none;}
 .notice-panel.active{display:block;}
 .notice-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:10px;padding:22px 24px;margin-bottom:14px;transition:all .22s;animation:fadeUp .4s ease both;}
@@ -66,44 +64,58 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,6,15,0.93);backdrop-filt
 .notice-title{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3;}
 .notice-link{color:var(--accent);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.5px;}
 .notice-link:hover{color:#fff;}
-.ext-link-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;animation:fadeUp .4s ease both;}
+.ext-link-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;animation:fadeUp .4s ease both;margin-bottom:14px;}
 .ext-link-card:hover{box-shadow:var(--glow);}
 .ext-link-label{font-size:16px;font-weight:700;}
 .ext-link-sub{font-size:12px;color:var(--muted);margin-top:3px;}
-.btn-visit{background:linear-gradient(90deg,var(--accent2),#4f46e5);border:none;border-radius:8px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;padding:8px 18px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:all .2s;}
+.btn-visit{background:linear-gradient(90deg,var(--accent2),#4f46e5);border:none;border-radius:8px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:700;padding:8px 18px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:all .2s;display:inline-block;}
 .btn-visit:hover{opacity:.85;transform:translateY(-1px);}
 
 /* ===== DRIVE CARDS ===== */
-.drive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:30px;}
+.drive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-bottom:30px;}
 .drive-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px 20px;text-align:center;text-decoration:none;color:var(--text);transition:all .25s;animation:fadeUp .4s ease both;display:block;}
 .drive-card:hover{border-color:var(--accent);box-shadow:var(--glow);transform:translateY(-4px);}
-.drive-icon{font-size:36px;margin-bottom:12px;}
-.drive-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;margin-bottom:4px;}
+.drive-icon{font-size:34px;margin-bottom:12px;}
+.drive-name{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;margin-bottom:4px;}
 .drive-sub{font-size:12px;color:var(--muted);}
 .drive-card.sec-a-card{border-top:3px solid var(--accent);}
 .drive-card.sec-b-card{border-top:3px solid #7c3aed;}
 .drive-card.sec-c-card{border-top:3px solid var(--accent3);}
 .drive-card.res-card{border-top:3px solid var(--green);}
+.drive-card.prev-card{border-top:3px solid var(--gold);}
+.sub-label{font-family:'Orbitron',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:12px;margin-top:4px;}
 
 /* ===== FAMILY ===== */
 .section-sub{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;}
 .sec-filter{background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:20px;color:var(--muted);font-family:'Rajdhani',sans-serif;font-size:13px;font-weight:600;padding:5px 16px;cursor:pointer;transition:all .2s;}
 .sec-filter.active,.sec-filter:hover{background:var(--accent2);border-color:var(--accent2);color:#fff;}
 .students-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px;}
-.stu-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px 12px 16px;text-align:center;transition:all .22s;animation:fadeUp .35s ease both;}
+.stu-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 12px 16px;text-align:center;transition:all .22s;animation:fadeUp .35s ease both;}
 .stu-card:hover{border-color:var(--accent);box-shadow:var(--glow);transform:translateY(-4px);}
-.stu-avatar{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:15px;font-weight:700;margin:0 auto 12px;border:2px solid;}
-.stu-name{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:5px;}
-.stu-roll{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:4px;}
-.stu-section{font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 10px;border-radius:20px;display:inline-block;margin-top:4px;}
-.sec-a{background:rgba(0,212,255,0.1);color:var(--accent);}
-.sec-b{background:rgba(124,58,237,0.12);color:#a78bfa;}
-.sec-c{background:rgba(249,115,22,0.1);color:var(--accent3);}
+.stu-card.cr-card{border-color:var(--gold);box-shadow:0 0 16px rgba(245,158,11,0.2);}
+/* Avatar */
+.stu-avatar{width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:15px;font-weight:700;margin:0 auto 4px;border:2px solid;position:relative;}
+.cr-crown{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:16px;line-height:1;}
+.stu-name{font-size:13px;font-weight:700;line-height:1.35;margin-bottom:5px;margin-top:6px;}
+.stu-roll{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:8px;}
+/* CR badge */
+.cr-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:20px;background:rgba(245,158,11,0.15);color:var(--gold);border:1px solid rgba(245,158,11,0.4);margin-bottom:6px;}
+/* Social icons */
+.stu-socials{display:flex;justify-content:center;gap:10px;margin-top:6px;}
+.stu-social-btn{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;text-decoration:none;transition:all .2s;border:1px solid var(--border);}
+.stu-social-btn:hover{transform:scale(1.12);}
+.stu-social-btn.fb{background:rgba(24,119,242,0.12);border-color:rgba(24,119,242,0.4);color:#1877f2;}
+.stu-social-btn.fb:hover{background:rgba(24,119,242,0.25);}
+.stu-social-btn.call{background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.4);color:#10b981;}
+.stu-social-btn.call:hover{background:rgba(16,185,129,0.25);}
+.stu-social-btn svg{width:15px;height:15px;}
+/* Avatar colors */
 .av0{background:rgba(0,212,255,0.1);border-color:var(--accent);color:var(--accent);}
 .av1{background:rgba(124,58,237,0.12);border-color:#7c3aed;color:#a78bfa;}
 .av2{background:rgba(249,115,22,0.1);border-color:var(--accent3);color:var(--accent3);}
 .av3{background:rgba(16,185,129,0.1);border-color:#10b981;color:#34d399;}
 .av4{background:rgba(236,72,153,0.1);border-color:#ec4899;color:#f472b6;}
+.av-cr{background:rgba(245,158,11,0.12)!important;border-color:var(--gold)!important;color:var(--gold)!important;box-shadow:0 0 12px rgba(245,158,11,0.3);}
 
 /* ===== FOOTER ===== */
 footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;border-top:1px solid var(--border);color:var(--muted);font-size:12px;font-family:'Share Tech Mono',monospace;}
@@ -111,11 +123,8 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
 .footer-dev{font-size:10px;color:rgba(148,163,184,0.55);margin-top:5px;}
 .footer-dev a{color:rgba(124,58,237,0.7);text-decoration:none;transition:color .2s;}
 .footer-dev a:hover{color:#a78bfa;}
-
-/* ===== CONTACT FAB ===== */
 .contact-fab{position:fixed;bottom:26px;right:26px;z-index:200;background:linear-gradient(135deg,var(--accent2),#4f46e5);border:none;border-radius:30px;color:#fff;font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;padding:11px 20px;cursor:pointer;box-shadow:0 4px 24px rgba(124,58,237,0.5);display:flex;align-items:center;gap:8px;transition:all .22s;text-decoration:none;}
 .contact-fab:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(124,58,237,0.65);}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
@@ -144,22 +153,27 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
 <!-- ===== NOTICES ===== -->
 <section class="section active" id="sec-notices">
   <div class="sec-heading">LATEST NOTICES</div>
-
-  <!-- Category buttons -->
   <div class="notice-cats">
-    <button class="ncat-btn active" onclick="showNoticePanel('me',this)" id="ncat-me">
+
+    <!-- 1. All Notices (was Common) — FIRST -->
+    <button class="ncat-btn active" onclick="showNoticePanel('common',this)" id="ncat-common">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      All Notices
+    </button>
+
+    <!-- 2. ME Dept -->
+    <button class="ncat-btn" onclick="showNoticePanel('me',this)" id="ncat-me">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       ME Dept. Notice
     </button>
+
+    <!-- 3. University -->
     <button class="ncat-btn" onclick="showNoticePanel('uni',this)" id="ncat-uni">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
       University Notice
     </button>
-    <button class="ncat-btn" onclick="showNoticePanel('common',this)" id="ncat-common">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      Common
-    </button>
-    <!-- WhatsApp with dropdown -->
+
+    <!-- 4. WhatsApp dropdown -->
     <button class="ncat-btn" id="ncat-wa" onclick="toggleWaDropdown(event)">
       <svg viewBox="0 0 24 24" fill="currentColor" style="color:#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       WhatsApp Notice
@@ -168,18 +182,31 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
         <a class="wa-item" href="https://chat.whatsapp.com/FcNRmCdqiq3JXmd4QYOW88" target="_blank">
           <span class="dot dot-a"></span> Section A
         </a>
-        <a class="wa-item" href="#" target="_blank" id="wa-b-link">
-          <span class="dot dot-b"></span> Section B <span style="font-size:10px;color:var(--muted);margin-left:4px;">(coming soon)</span>
+        <a class="wa-item" href="https://chat.whatsapp.com/EtaUoK7VGAVG12iYakPBaV" target="_blank">
+          <span class="dot dot-b"></span> Section B
         </a>
-        <a class="wa-item" href="#" target="_blank" id="wa-c-link">
-          <span class="dot dot-c"></span> Section C <span style="font-size:10px;color:var(--muted);margin-left:4px;">(coming soon)</span>
+        <a class="wa-item" href="https://chat.whatsapp.com/EGK5Myt0slkJ3rRqlyjkU9" target="_blank">
+          <span class="dot dot-c"></span> Section C
+        </a>
+        <a class="wa-item" href="https://chat.whatsapp.com/HwH8Avq0cot85W1oGpSFNs" target="_blank">
+          <span class="dot dot-ts"></span> Teachers &amp; Students
         </a>
       </div>
     </button>
+
   </div>
 
-  <!-- ME Dept Notice Panel -->
-  <div class="notice-panel active" id="panel-me">
+  <!-- All Notices Panel (1st, active) -->
+  <div class="notice-panel active" id="panel-common">
+    <div class="notice-card">
+      <div class="notice-date">MAY 20, 2026</div>
+      <div class="notice-title">Common notices will be uploaded here by the admin.</div>
+      <span style="color:var(--muted);font-size:13px;">Stay tuned for updates...</span>
+    </div>
+  </div>
+
+  <!-- ME Dept Panel -->
+  <div class="notice-panel" id="panel-me">
     <div class="ext-link-card">
       <div>
         <div class="ext-link-label">ME Department Official Notice Board</div>
@@ -189,7 +216,7 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
     </div>
   </div>
 
-  <!-- University Notice Panel -->
+  <!-- University Panel -->
   <div class="notice-panel" id="panel-uni">
     <div class="ext-link-card">
       <div>
@@ -199,25 +226,13 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
       <a href="https://www.ruet.ac.bd/notice" target="_blank" class="btn-visit">Visit →</a>
     </div>
   </div>
-
-  <!-- Common Notice Panel -->
-<div class="notice-panel" id="panel-common">
-
-  <div class="notice-card">
-    <div class="notice-date">MAY 17, 2026</div>
-    <div class="notice-title">Student Registration Serial No.</div>
-    <a href="https://drive.google.com/file/d/1-FKE28I2DASll_mQZ_Yk-aLgK-I6QXKE/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
-  </div>
-
-</div>
 </section>
 
 <!-- ===== CLASS NOTES & RESOURCES ===== -->
 <section class="section" id="sec-resources">
   <div class="sec-heading">CLASS NOTES &amp; RESOURCES</div>
 
-  <!-- Section-wise Notes -->
-  <div style="margin-bottom:10px;font-family:'Orbitron',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;">CLASS NOTES — BY SECTION</div>
+  <div class="sub-label">CLASS NOTES — BY SECTION</div>
   <div class="drive-grid">
     <a class="drive-card sec-a-card" href="https://drive.google.com/drive/folders/1BireUk6PNRXKRq64t8mFzB_4T24EfHqG?usp=drive_link" target="_blank">
       <div class="drive-icon">📂</div>
@@ -236,13 +251,26 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
     </a>
   </div>
 
-  <!-- Resources -->
-  <div style="margin-top:10px;margin-bottom:10px;font-family:'Orbitron',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;">RESOURCES</div>
+  <div class="sub-label">RESOURCES</div>
   <div class="drive-grid">
     <a class="drive-card res-card" href="https://drive.google.com/drive/folders/18qCFP6b0T4jYIbxszQ9i_nbWnhSRa-GT?usp=drive_link" target="_blank">
       <div class="drive-icon">🗂️</div>
       <div class="drive-name">Resources</div>
       <div class="drive-sub">Syllabus, reference books, course materials &amp; more</div>
+    </a>
+  </div>
+
+  <div class="sub-label">RUET ME PREVIOUS WEBSITES</div>
+  <div class="drive-grid">
+    <a class="drive-card prev-card" href="https://sites.google.com/view/ruetmechabot" target="_blank">
+      <div class="drive-icon">🤖</div>
+      <div class="drive-name">Mechabot</div>
+      <div class="drive-sub">sites.google.com/view/ruetmechabot</div>
+    </a>
+    <a class="drive-card prev-card" href="https://mechaverse.wealthdock.org/" target="_blank">
+      <div class="drive-icon">🌐</div>
+      <div class="drive-name">Mechaverse</div>
+      <div class="drive-sub">mechaverse.wealthdock.org</div>
     </a>
   </div>
 </section>
@@ -271,9 +299,9 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
 
 <script>
 // ======================================================
-// NOTICE TABS
+// NOTICE FUNCTIONS
 // ======================================================
-function showNoticePanel(id, btn){
+function showNoticePanel(id,btn){
   document.querySelectorAll('.ncat-btn').forEach(b=>{b.classList.remove('active');b.classList.remove('open');});
   document.querySelectorAll('.notice-panel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
@@ -294,190 +322,198 @@ document.addEventListener('click',()=>{
 
 // ======================================================
 // STUDENT DATA
+// CR = Class Representative — roll numbers to be updated
+// fb = facebook profile link, phone = phone number
 // ======================================================
 const students=[
-  {roll:"2502001",name:"Atiq Faiyaz Rahman",section:"A"},
-  {roll:"2502002",name:"Farhan Sadik Siam",section:"A"},
-  {roll:"2502003",name:"Salman Aziz Mahi",section:"A"},
-  {roll:"2502004",name:"Tasnim Alam Shuvro",section:"A"},
-  {roll:"2502005",name:"Md. Mahadi Hassan Bhuiyan",section:"A"},
-  {roll:"2502006",name:"Tasnia Ahmed",section:"A"},
-  {roll:"2502007",name:"Md. Omar Faruque",section:"A"},
-  {roll:"2502008",name:"Rhiju Dhar",section:"A"},
-  {roll:"2502009",name:"Eamin Mahmud",section:"A"},
-  {roll:"2502010",name:"Abrar Faiyaz",section:"A"},
-  {roll:"2502011",name:"Shaiful Islam",section:"A"},
-  {roll:"2502012",name:"Md. Ehasanul Haque Shihab",section:"A"},
-  {roll:"2502013",name:"Md. Abdullah Haque Emon",section:"A"},
-  {roll:"2502014",name:"Md. Muhtasin Islam Samin",section:"A"},
-  {roll:"2502015",name:"Thasun Haneen",section:"A"},
-  {roll:"2502016",name:"Md. Nusaib-ul Islam",section:"A"},
-  {roll:"2502017",name:"Sakib Ahmed Sojol",section:"A"},
-  {roll:"2502018",name:"Anupom Chanda Aurgo",section:"A"},
-  {roll:"2502019",name:"Ekhtiar Uddin Ahmed",section:"A"},
-  {roll:"2502020",name:"Mainul Islam Khan Shahad",section:"A"},
-  {roll:"2502021",name:"Md. Mahmud Hasan Mafi",section:"A"},
-  {roll:"2502022",name:"Dipon Mondal",section:"A"},
-  {roll:"2502023",name:"Arafat Islam",section:"A"},
-  {roll:"2502024",name:"Fahimul Habib",section:"A"},
-  {roll:"2502025",name:"Raihan Hossain",section:"A"},
-  {roll:"2502026",name:"Jubayer Ahmed",section:"A"},
-  {roll:"2502027",name:"Antara Saha",section:"A"},
-  {roll:"2502028",name:"Ehsanul Kabir",section:"A"},
-  {roll:"2502029",name:"Mahid Khan",section:"A"},
-  {roll:"2502030",name:"Pritul Devnath",section:"A"},
-  {roll:"2502031",name:"Toha Islam",section:"A"},
-  {roll:"2502032",name:"Farhana Alam",section:"A"},
-  {roll:"2502033",name:"Muntasir Mahbub",section:"A"},
-  {roll:"2502034",name:"Md. Naimur Rahman",section:"A"},
-  {roll:"2502035",name:"Mahir Mahamud",section:"A"},
-  {roll:"2502036",name:"Md. Naim Hossain",section:"A"},
-  {roll:"2502037",name:"Swarnil Banik",section:"A"},
-  {roll:"2502038",name:"Tasin Ahammed Rafi",section:"A"},
-  {roll:"2502039",name:"Noor Rejwan Khan Omi",section:"A"},
-  {roll:"2502040",name:"Toufica Jahan",section:"A"},
-  {roll:"2502041",name:"Md. Tarek",section:"A"},
-  {roll:"2502042",name:"Rafyet Ullah Sani",section:"A"},
-  {roll:"2502043",name:"Souvik Acharjee",section:"A"},
-  {roll:"2502044",name:"Md. Hasan Mahamud",section:"A"},
-  {roll:"2502045",name:"Tanvir Mahtab Apurba",section:"A"},
-  {roll:"2502046",name:"Md. Sifat Ahmed",section:"A"},
-  {roll:"2502047",name:"Tauhidul Islam Tamim",section:"A"},
-  {roll:"2502048",name:"Md. Masrur Irtisum",section:"A"},
-  {roll:"2502049",name:"Md. Mahdi Hasan",section:"A"},
-  {roll:"2502050",name:"Fardin Sardar",section:"A"},
-  {roll:"2502051",name:"Md. Fayyaz Zaman",section:"A"},
-  {roll:"2502052",name:"Alif Mahmud",section:"A"},
-  {roll:"2502053",name:"Sunbin Ahmed",section:"A"},
-  {roll:"2502054",name:"Abdullah",section:"A"},
-  {roll:"2502055",name:"Md. Mushfique Sad Akib",section:"A"},
-  {roll:"2502056",name:"Ponuel Pritom Roy",section:"A"},
-  {roll:"2502057",name:"Md. Masum Al Imran",section:"A"},
-  {roll:"2502058",name:"Junaid Jamal Tasin",section:"A"},
-  {roll:"2502059",name:"Md. Yasin Kazi",section:"A"},
-  {roll:"2502060",name:"Taofiqul Islam Rupom",section:"A"},
-  {roll:"2502061",name:"S. M. Iftekhar Alam Tanvir",section:"B"},
-  {roll:"2502062",name:"Abdullah Al Aziz",section:"B"},
-  {roll:"2502063",name:"Afiah Mubashshirah",section:"B"},
-  {roll:"2502064",name:"Sumita Binte Habib Sneha",section:"B"},
-  {roll:"2502065",name:"Md. Saleh Uddin Zobayer",section:"B"},
-  {roll:"2502066",name:"Md. All Emran",section:"B"},
-  {roll:"2502067",name:"Zahedur Rafsan",section:"B"},
-  {roll:"2502068",name:"Reyad Ahmed Sarker",section:"B"},
-  {roll:"2502069",name:"Nazir Shavry Rushad",section:"B"},
-  {roll:"2502070",name:"Jaowad Sadman Chowdhury",section:"B"},
-  {roll:"2502071",name:"Saad Gifary",section:"B"},
-  {roll:"2502072",name:"Md. Masrafi Rahman Jihad",section:"B"},
-  {roll:"2502073",name:"Istiaque Ahmmad Tusher",section:"B"},
-  {roll:"2502074",name:"Md. Arif Hasnat Mahin",section:"B"},
-  {roll:"2502075",name:"Md. Al-Amin Khan",section:"B"},
-  {roll:"2502076",name:"Muhaimin Islam Ahon",section:"B"},
-  {roll:"2502077",name:"Sajedul Alam Sadi",section:"B"},
-  {roll:"2502078",name:"Adittya Biswas",section:"B"},
-  {roll:"2502079",name:"Md. Alamin Hossain",section:"B"},
-  {roll:"2502080",name:"Anamul Huque Sourov",section:"B"},
-  {roll:"2502081",name:"Afif Ahmed",section:"B"},
-  {roll:"2502082",name:"Md. Parvez Miah",section:"B"},
-  {roll:"2502083",name:"Aorpon Roy",section:"B"},
-  {roll:"2502084",name:"Md. Zahid Hassan",section:"B"},
-  {roll:"2502085",name:"Nabendu Mondal",section:"B"},
-  {roll:"2502086",name:"Md. Farhan Saba",section:"B"},
-  {roll:"2502087",name:"Md. Sohan Alam Badhon",section:"B"},
-  {roll:"2502088",name:"Aroup Devnath",section:"B"},
-  {roll:"2502089",name:"Mahmudul Sikder Labib",section:"B"},
-  {roll:"2502090",name:"Md. Shamsuzzaman Patowari",section:"B"},
-  {roll:"2502091",name:"Md. Shadhin Hossain",section:"B"},
-  {roll:"2502092",name:"Ahnaf Akif",section:"B"},
-  {roll:"2502093",name:"Ahnaf Iqbal",section:"B"},
-  {roll:"2502094",name:"Lamim Mahmud Borno",section:"B"},
-  {roll:"2502095",name:"Kazi Ahnaf Mustafiz",section:"B"},
-  {roll:"2502096",name:"Himel Sarker",section:"B"},
-  {roll:"2502097",name:"Kazi Sayeed Ahsan",section:"B"},
-  {roll:"2502098",name:"Amrit Roy",section:"B"},
-  {roll:"2502099",name:"Md. Aliar Ahmed",section:"B"},
-  {roll:"2502100",name:"Md. Rubel Hossain",section:"B"},
-  {roll:"2502101",name:"Mujakkir Hossain",section:"B"},
-  {roll:"2502102",name:"Md. Nahian Islam",section:"B"},
-  {roll:"2502103",name:"Afia Farzana Khan Pritha",section:"B"},
-  {roll:"2502104",name:"Md. Iftikhar Oliullah",section:"B"},
-  {roll:"2502105",name:"Abdus Samad",section:"B"},
-  {roll:"2502106",name:"Abdur Rahim",section:"B"},
-  {roll:"2502107",name:"Shahriar Kuddus",section:"B"},
-  {roll:"2502108",name:"Md. Mahmudur Rahman",section:"B"},
-  {roll:"2502109",name:"Shadhin Kumar Shikder",section:"B"},
-  {roll:"2502110",name:"Fabiha Monir Prathama",section:"B"},
-  {roll:"2502111",name:"Md. Hasibul Hossain",section:"B"},
-  {roll:"2502112",name:"Md. Rahik Tanha",section:"B"},
-  {roll:"2502113",name:"Md. Nafi-ul-Islam",section:"B"},
-  {roll:"2502114",name:"Mahir Ahnaf Islam Mugdho",section:"B"},
-  {roll:"2502115",name:"Tafsan Islam Sanji",section:"B"},
-  {roll:"2502116",name:"Md. Golam Kibriya",section:"B"},
-  {roll:"2502117",name:"Umme Atika",section:"B"},
-  {roll:"2502118",name:"Md. Mahafuj Ahamed Mafi",section:"B"},
-  {roll:"2502119",name:"Shree Kashob Dev",section:"B"},
-  {roll:"2502120",name:"Mahfuja Fariha",section:"B"},
-  {roll:"2502121",name:"Rijwan Ahmad",section:"C"},
-  {roll:"2502122",name:"Abu Sufian",section:"C"},
-  {roll:"2502123",name:"Taief Bin Mohsin",section:"C"},
-  {roll:"2502124",name:"Md. Fahim Sadik",section:"C"},
-  {roll:"2502125",name:"Athai Habiba",section:"C"},
-  {roll:"2502126",name:"Mst. Anika Tahsin",section:"C"},
-  {roll:"2502127",name:"Kazi Nafizur Rahman",section:"C"},
-  {roll:"2502128",name:"Iftekhar Al Sami",section:"C"},
-  {roll:"2502129",name:"Nowsen Motin Nowreen",section:"C"},
-  {roll:"2502130",name:"Md. Taseen Mosharof",section:"C"},
-  {roll:"2502131",name:"Md. Mehedi Hasan Soikot",section:"C"},
-  {roll:"2502132",name:"Shahedul Alam Tahasin",section:"C"},
-  {roll:"2502133",name:"Md. Mostafizur Sarker",section:"C"},
-  {roll:"2502134",name:"Shuvajit Dwari",section:"C"},
-  {roll:"2502135",name:"Md. Nazmul Hossain Mollik",section:"C"},
-  {roll:"2502136",name:"Khairul Amin Siddiqi",section:"C"},
-  {roll:"2502137",name:"Hamim Al Wahid Awon",section:"C"},
-  {roll:"2502138",name:"Md. Nafis Iqbal",section:"C"},
-  {roll:"2502139",name:"Takian Ali Khan Mahadi",section:"C"},
-  {roll:"2502140",name:"Md. Sabbir Ahmmad",section:"C"},
-  {roll:"2502141",name:"Spondon Chakraborty Utsho",section:"C"},
-  {roll:"2502142",name:"Ashraful Islam Tonoy",section:"C"},
-  {roll:"2502143",name:"Shams Ehsan",section:"C"},
-  {roll:"2502144",name:"Md. Abdullah Al Shafi",section:"C"},
-  {roll:"2502145",name:"Sabbir Hossain Saif",section:"C"},
-  {roll:"2502146",name:"Md. Daiyan Sajjad Shifat",section:"C"},
-  {roll:"2502147",name:"Manish Kanti Das",section:"C"},
-  {roll:"2502148",name:"Md. Adnan Mahi",section:"C"},
-  {roll:"2502149",name:"Md. Rupom Khan",section:"C"},
-  {roll:"2502150",name:"Shanto Dey",section:"C"},
-  {roll:"2502151",name:"Md. Sadman Sakib",section:"C"},
-  {roll:"2502152",name:"Afnanul Huda Afnan",section:"C"},
-  {roll:"2502153",name:"K. M. Nazmus Sakib Seum",section:"C"},
-  {roll:"2502154",name:"Avik Bhattacharjee",section:"C"},
-  {roll:"2502155",name:"Tahmid Shuvo",section:"C"},
-  {roll:"2502156",name:"Md. Mursalin Sheikh",section:"C"},
-  {roll:"2502157",name:"Tanvir Rahman Sakib",section:"C"},
-  {roll:"2502158",name:"Q. A. M. Shahriar Aranya",section:"C"},
-  {roll:"2502159",name:"Jahid Ekbal Jehan",section:"C"},
-  {roll:"2502160",name:"Md. Mashfir Rishan Chowdhury",section:"C"},
-  {roll:"2502161",name:"Tahmid Wadi",section:"C"},
-  {roll:"2502162",name:"Apon Saha",section:"C"},
-  {roll:"2502163",name:"Swapno Barshan Das",section:"C"},
-  {roll:"2502164",name:"Md. Arif Hasnat Sahib",section:"C"},
-  {roll:"2502165",name:"Al Musabbir Hossain",section:"C"},
-  {roll:"2502166",name:"Mohammad Mahir Labib",section:"C"},
-  {roll:"2502167",name:"Radiat Rahman",section:"C"},
-  {roll:"2502168",name:"Ahanaf Rayeed",section:"C"},
-  {roll:"2502169",name:"Md. Tanzim Sazid Bhuiyan",section:"C"},
-  {roll:"2502170",name:"Md. Rakib Khan",section:"C"},
-  {roll:"2502171",name:"Md. Samin Yeasar Abid",section:"C"},
-  {roll:"2502172",name:"Moontaha Zaman Muna",section:"C"},
-  {roll:"2502173",name:"Khayrul Alam Ratul",section:"C"},
-  {roll:"2502174",name:"Md Nurul Afsar Nihal",section:"C"},
-  {roll:"2502175",name:"Md. Mehedi Hasan",section:"C"},
-  {roll:"2502176",name:"Soikat Chowdhury",section:"C"},
-  {roll:"2502177",name:"Riazur Rahman Labib",section:"C"},
-  {roll:"2502178",name:"Rahib Irtiz Bhuiyan",section:"C"},
-  {roll:"2502179",name:"Md. Arian Rahman",section:"C"},
-  {roll:"2502180",name:"Md. Jahurul Islam Tushar",section:"C"},
+  // ---- A SECTION ----
+  {roll:"2502001",name:"Atiq Faiyaz Rahman",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502002",name:"Farhan Sadik Siam",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502003",name:"Salman Aziz Mahi",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502004",name:"Tasnim Alam Shuvro",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502005",name:"Md. Mahadi Hassan Bhuiyan",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502006",name:"Tasnia Ahmed",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502007",name:"Md. Omar Faruque",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502008",name:"Rhiju Dhar",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502009",name:"Eamin Mahmud",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502010",name:"Abrar Faiyaz",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502011",name:"Shaiful Islam",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502012",name:"Md. Ehasanul Haque Shihab",section:"A",cr:false,fb:"https://www.facebook.com/ehasanul.haque.shihab",phone:""},
+  {roll:"2502013",name:"Md. Abdullah Haque Emon",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502014",name:"Md. Muhtasin Islam Samin",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502015",name:"Thasun Haneen",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502016",name:"Md. Nusaib-ul Islam",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502017",name:"Sakib Ahmed Sojol",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502018",name:"Anupom Chanda Aurgo",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502019",name:"Ekhtiar Uddin Ahmed",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502020",name:"Mainul Islam Khan Shahad",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502021",name:"Md. Mahmud Hasan Mafi",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502022",name:"Dipon Mondal",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502023",name:"Arafat Islam",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502024",name:"Fahimul Habib",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502025",name:"Raihan Hossain",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502026",name:"Jubayer Ahmed",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502027",name:"Antara Saha",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502028",name:"Ehsanul Kabir",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502029",name:"Mahid Khan",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502030",name:"Pritul Devnath",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502031",name:"Toha Islam",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502032",name:"Farhana Alam",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502033",name:"Muntasir Mahbub",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502034",name:"Md. Naimur Rahman",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502035",name:"Mahir Mahamud",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502036",name:"Md. Naim Hossain",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502037",name:"Swarnil Banik",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502038",name:"Tasin Ahammed Rafi",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502039",name:"Noor Rejwan Khan Omi",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502040",name:"Toufica Jahan",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502041",name:"Md. Tarek",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502042",name:"Rafyet Ullah Sani",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502043",name:"Souvik Acharjee",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502044",name:"Md. Hasan Mahamud",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502045",name:"Tanvir Mahtab Apurba",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502046",name:"Md. Sifat Ahmed",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502047",name:"Tauhidul Islam Tamim",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502048",name:"Md. Masrur Irtisum",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502049",name:"Md. Mahdi Hasan",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502050",name:"Fardin Sardar",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502051",name:"Md. Fayyaz Zaman",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502052",name:"Alif Mahmud",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502053",name:"Sunbin Ahmed",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502054",name:"Abdullah",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502055",name:"Md. Mushfique Sad Akib",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502056",name:"Ponuel Pritom Roy",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502057",name:"Md. Masum Al Imran",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502058",name:"Junaid Jamal Tasin",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502059",name:"Md. Yasin Kazi",section:"A",cr:false,fb:"",phone:""},
+  {roll:"2502060",name:"Taofiqul Islam Rupom",section:"A",cr:false,fb:"",phone:""},
+  // ---- B SECTION ----
+  {roll:"2502061",name:"S. M. Iftekhar Alam Tanvir",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502062",name:"Abdullah Al Aziz",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502063",name:"Afiah Mubashshirah",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502064",name:"Sumita Binte Habib Sneha",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502065",name:"Md. Saleh Uddin Zobayer",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502066",name:"Md. All Emran",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502067",name:"Zahedur Rafsan",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502068",name:"Reyad Ahmed Sarker",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502069",name:"Nazir Shavry Rushad",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502070",name:"Jaowad Sadman Chowdhury",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502071",name:"Saad Gifary",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502072",name:"Md. Masrafi Rahman Jihad",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502073",name:"Istiaque Ahmmad Tusher",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502074",name:"Md. Arif Hasnat Mahin",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502075",name:"Md. Al-Amin Khan",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502076",name:"Muhaimin Islam Ahon",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502077",name:"Sajedul Alam Sadi",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502078",name:"Adittya Biswas",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502079",name:"Md. Alamin Hossain",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502080",name:"Anamul Huque Sourov",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502081",name:"Afif Ahmed",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502082",name:"Md. Parvez Miah",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502083",name:"Aorpon Roy",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502084",name:"Md. Zahid Hassan",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502085",name:"Nabendu Mondal",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502086",name:"Md. Farhan Saba",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502087",name:"Md. Sohan Alam Badhon",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502088",name:"Aroup Devnath",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502089",name:"Mahmudul Sikder Labib",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502090",name:"Md. Shamsuzzaman Patowari",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502091",name:"Md. Shadhin Hossain",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502092",name:"Ahnaf Akif",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502093",name:"Ahnaf Iqbal",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502094",name:"Lamim Mahmud Borno",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502095",name:"Kazi Ahnaf Mustafiz",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502096",name:"Himel Sarker",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502097",name:"Kazi Sayeed Ahsan",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502098",name:"Amrit Roy",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502099",name:"Md. Aliar Ahmed",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502100",name:"Md. Rubel Hossain",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502101",name:"Mujakkir Hossain",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502102",name:"Md. Nahian Islam",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502103",name:"Afia Farzana Khan Pritha",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502104",name:"Md. Iftikhar Oliullah",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502105",name:"Abdus Samad",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502106",name:"Abdur Rahim",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502107",name:"Shahriar Kuddus",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502108",name:"Md. Mahmudur Rahman",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502109",name:"Shadhin Kumar Shikder",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502110",name:"Fabiha Monir Prathama",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502111",name:"Md. Hasibul Hossain",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502112",name:"Md. Rahik Tanha",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502113",name:"Md. Nafi-ul-Islam",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502114",name:"Mahir Ahnaf Islam Mugdho",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502115",name:"Tafsan Islam Sanji",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502116",name:"Md. Golam Kibriya",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502117",name:"Umme Atika",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502118",name:"Md. Mahafuj Ahamed Mafi",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502119",name:"Shree Kashob Dev",section:"B",cr:false,fb:"",phone:""},
+  {roll:"2502120",name:"Mahfuja Fariha",section:"B",cr:false,fb:"",phone:""},
+  // ---- C SECTION ----
+  {roll:"2502121",name:"Rijwan Ahmad",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502122",name:"Abu Sufian",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502123",name:"Taief Bin Mohsin",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502124",name:"Md. Fahim Sadik",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502125",name:"Athai Habiba",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502126",name:"Mst. Anika Tahsin",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502127",name:"Kazi Nafizur Rahman",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502128",name:"Iftekhar Al Sami",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502129",name:"Nowsen Motin Nowreen",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502130",name:"Md. Taseen Mosharof",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502131",name:"Md. Mehedi Hasan Soikot",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502132",name:"Shahedul Alam Tahasin",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502133",name:"Md. Mostafizur Sarker",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502134",name:"Shuvajit Dwari",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502135",name:"Md. Nazmul Hossain Mollik",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502136",name:"Khairul Amin Siddiqi",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502137",name:"Hamim Al Wahid Awon",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502138",name:"Md. Nafis Iqbal",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502139",name:"Takian Ali Khan Mahadi",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502140",name:"Md. Sabbir Ahmmad",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502141",name:"Spondon Chakraborty Utsho",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502142",name:"Ashraful Islam Tonoy",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502143",name:"Shams Ehsan",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502144",name:"Md. Abdullah Al Shafi",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502145",name:"Sabbir Hossain Saif",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502146",name:"Md. Daiyan Sajjad Shifat",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502147",name:"Manish Kanti Das",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502148",name:"Md. Adnan Mahi",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502149",name:"Md. Rupom Khan",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502150",name:"Shanto Dey",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502151",name:"Md. Sadman Sakib",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502152",name:"Afnanul Huda Afnan",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502153",name:"K. M. Nazmus Sakib Seum",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502154",name:"Avik Bhattacharjee",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502155",name:"Tahmid Shuvo",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502156",name:"Md. Mursalin Sheikh",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502157",name:"Tanvir Rahman Sakib",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502158",name:"Q. A. M. Shahriar Aranya",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502159",name:"Jahid Ekbal Jehan",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502160",name:"Md. Mashfir Rishan Chowdhury",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502161",name:"Tahmid Wadi",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502162",name:"Apon Saha",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502163",name:"Swapno Barshan Das",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502164",name:"Md. Arif Hasnat Sahib",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502165",name:"Al Musabbir Hossain",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502166",name:"Mohammad Mahir Labib",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502167",name:"Radiat Rahman",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502168",name:"Ahanaf Rayeed",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502169",name:"Md. Tanzim Sazid Bhuiyan",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502170",name:"Md. Rakib Khan",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502171",name:"Md. Samin Yeasar Abid",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502172",name:"Moontaha Zaman Muna",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502173",name:"Khayrul Alam Ratul",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502174",name:"Md Nurul Afsar Nihal",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502175",name:"Md. Mehedi Hasan",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502176",name:"Soikat Chowdhury",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502177",name:"Riazur Rahman Labib",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502178",name:"Rahib Irtiz Bhuiyan",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502179",name:"Md. Arian Rahman",section:"C",cr:false,fb:"",phone:""},
+  {roll:"2502180",name:"Md. Jahurul Islam Tushar",section:"C",cr:false,fb:"",phone:""},
 ];
 
+// ======================================================
+// RENDER STUDENTS
+// ======================================================
 const avColors=['av0','av1','av2','av3','av4'];
 function getInitials(n){
   const skip=['Md.','Mst.','S.','M.','K.','Q.','A.','G.','Al'];
@@ -489,12 +525,24 @@ function renderStudents(list){
   g.innerHTML='';
   list.forEach((s,i)=>{
     const d=document.createElement('div');
-    d.className='stu-card';
-    const sc='sec-'+s.section.toLowerCase();
-    d.innerHTML=`<div class="stu-avatar ${avColors[i%5]}">${getInitials(s.name)}</div>
-    <div class="stu-name">${s.name}</div>
-    <div class="stu-roll">Roll: ${s.roll}</div>
-    <span class="stu-section ${sc}">Section ${s.section}</span>`;
+    d.className='stu-card'+(s.cr?' cr-card':'');
+    const avClass=s.cr?'av-cr':avColors[i%5];
+    const fbBtn=`<a class="stu-social-btn fb" href="${s.fb||'#'}" target="_blank" title="Facebook" ${!s.fb?'style="opacity:0.35;pointer-events:none;"':''}>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    </a>`;
+    const callBtn=`<a class="stu-social-btn call" href="${s.phone?'tel:'+s.phone:'#'}" title="Call" ${!s.phone?'style="opacity:0.35;pointer-events:none;"':''}>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.17 1.18 2 2 0 012.18 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.17 6.17l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    </a>`;
+    d.innerHTML=`
+      <div class="stu-avatar ${avClass}">
+        ${s.cr?'<span class="cr-crown">👑</span>':''}
+        ${getInitials(s.name)}
+      </div>
+      ${s.cr?'<div class="cr-badge">★ CR</div>':''}
+      <div class="stu-name">${s.name}</div>
+      <div class="stu-roll">Roll: ${s.roll}</div>
+      <div class="stu-socials">${fbBtn}${callBtn}</div>
+    `;
     g.appendChild(d);
   });
   document.getElementById('stuCount').textContent=list.length+' Students';
@@ -539,139 +587,16 @@ const ctx=canvas.getContext('2d');
 function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
 resize();
 window.addEventListener('resize',resize);
-
-const pts=Array.from({length:55},()=>({
-  x:Math.random()*3000,y:Math.random()*1500,
-  vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,
-  r:Math.random()*1.4+.4,
-  c:['rgba(0,212,255,','rgba(124,58,237,','rgba(249,115,22,'][Math.floor(Math.random()*3)]
-}));
-
-class Gear{
-  constructor(){
-    this.x=Math.random()*window.innerWidth;
-    this.y=Math.random()*window.innerHeight;
-    this.r=18+Math.random()*50;
-    this.teeth=5+Math.floor(Math.random()*9);
-    this.spd=(Math.random()-.5)*.003;
-    this.a=Math.random()*Math.PI*2;
-    this.col=Math.random()>.5?'rgba(0,212,255,':'rgba(124,58,237,';
-    this.alpha=.04+Math.random()*.09;
-  }
-  draw(){
-    ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.a);
-    const t=this.r*.22;
-    ctx.beginPath();
-    for(let i=0;i<this.teeth;i++){
-      const a=(i/this.teeth)*Math.PI*2,a1=a-Math.PI/this.teeth*.45,a2=a+Math.PI/this.teeth*.45;
-      ctx.lineTo(Math.cos(a1)*this.r,Math.sin(a1)*this.r);
-      ctx.lineTo(Math.cos(a1)*(this.r+t),Math.sin(a1)*(this.r+t));
-      ctx.lineTo(Math.cos(a2)*(this.r+t),Math.sin(a2)*(this.r+t));
-      ctx.lineTo(Math.cos(a2)*this.r,Math.sin(a2)*this.r);
-    }
-    ctx.closePath();
-    ctx.strokeStyle=this.col+this.alpha+')';ctx.lineWidth=1.4;ctx.stroke();
-    ctx.beginPath();ctx.arc(0,0,this.r*.3,0,Math.PI*2);
-    ctx.strokeStyle=this.col+this.alpha+')';ctx.stroke();
-    ctx.restore();
-    this.a+=this.spd;
-  }
-}
+const pts=Array.from({length:55},()=>({x:Math.random()*3000,y:Math.random()*1500,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1.4+.4,c:['rgba(0,212,255,','rgba(124,58,237,','rgba(249,115,22,'][Math.floor(Math.random()*3)]}));
+class Gear{constructor(){this.x=Math.random()*window.innerWidth;this.y=Math.random()*window.innerHeight;this.r=18+Math.random()*50;this.teeth=5+Math.floor(Math.random()*9);this.spd=(Math.random()-.5)*.003;this.a=Math.random()*Math.PI*2;this.col=Math.random()>.5?'rgba(0,212,255,':'rgba(124,58,237,';this.alpha=.04+Math.random()*.09;}draw(){ctx.save();ctx.translate(this.x,this.y);ctx.rotate(this.a);const t=this.r*.22;ctx.beginPath();for(let i=0;i<this.teeth;i++){const a=(i/this.teeth)*Math.PI*2,a1=a-Math.PI/this.teeth*.45,a2=a+Math.PI/this.teeth*.45;ctx.lineTo(Math.cos(a1)*this.r,Math.sin(a1)*this.r);ctx.lineTo(Math.cos(a1)*(this.r+t),Math.sin(a1)*(this.r+t));ctx.lineTo(Math.cos(a2)*(this.r+t),Math.sin(a2)*(this.r+t));ctx.lineTo(Math.cos(a2)*this.r,Math.sin(a2)*this.r);}ctx.closePath();ctx.strokeStyle=this.col+this.alpha+')';ctx.lineWidth=1.4;ctx.stroke();ctx.beginPath();ctx.arc(0,0,this.r*.3,0,Math.PI*2);ctx.strokeStyle=this.col+this.alpha+')';ctx.stroke();ctx.restore();this.a+=this.spd;}}
 const gears=Array.from({length:7},()=>new Gear());
-
-class Veh{
-  constructor(type){
-    this.type=type;
-    this.dir=Math.random()>.5?1:-1;
-    this.x=Math.random()*window.innerWidth;
-    this.y=this.initY();
-    this.spd=(0.5+Math.random()*.9)*(type==='jet'?2.2:type==='rocket'?.8:1);
-    this.scale=.45+Math.random()*.5;
-    this.alpha=.07+Math.random()*.12;
-  }
-  initY(){
-    if(this.type==='car') return window.innerHeight*(.6+Math.random()*.3);
-    if(this.type==='rocket') return Math.random()*window.innerHeight*.7;
-    return Math.random()*window.innerHeight*.75;
-  }
-  update(){
-    this.x+=this.spd*this.dir;
-    if(this.dir===1&&this.x>canvas.width+220){this.dir=-1;this.x=canvas.width+200;this.y=this.initY();}
-    if(this.dir===-1&&this.x<-220){this.dir=1;this.x=-200;this.y=this.initY();}
-  }
-  draw(){
-    if(this.type==='jet') drawJet(this.x,this.y,this.scale,this.alpha,this.dir);
-    else if(this.type==='car') drawCar(this.x,this.y,this.scale,this.alpha,this.dir);
-    else if(this.type==='plane') drawPlane(this.x,this.y,this.scale,this.alpha,this.dir);
-    else drawRocket(this.x,this.y,this.scale,this.alpha);
-  }
-}
-
-function drawJet(x,y,sc,al,dir){
-  ctx.save();ctx.translate(x,y);ctx.scale(dir*sc,sc);ctx.globalAlpha=al;
-  ctx.strokeStyle='rgba(0,212,255,0.9)';ctx.fillStyle='rgba(0,212,255,0.06)';ctx.lineWidth=1.1;
-  ctx.beginPath();ctx.moveTo(60,0);ctx.lineTo(15,8);ctx.lineTo(-40,6);ctx.lineTo(-50,0);ctx.lineTo(-40,-6);ctx.lineTo(15,-8);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(12,2);ctx.lineTo(-12,42);ctx.lineTo(-28,42);ctx.lineTo(-4,2);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(12,-2);ctx.lineTo(-12,-42);ctx.lineTo(-28,-42);ctx.lineTo(-4,-2);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-36,0);ctx.lineTo(-48,16);ctx.lineTo(-44,5);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-36,0);ctx.lineTo(-48,-16);ctx.lineTo(-44,-5);ctx.closePath();ctx.fill();ctx.stroke();
-  const eg=ctx.createRadialGradient(-52,0,0,-52,0,14);eg.addColorStop(0,'rgba(249,115,22,0.65)');eg.addColorStop(1,'transparent');
-  ctx.beginPath();ctx.arc(-52,0,12,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();
-  ctx.restore();
-}
-function drawCar(x,y,sc,al,dir){
-  ctx.save();ctx.translate(x,y);ctx.scale(dir*sc,sc);ctx.globalAlpha=al;
-  ctx.strokeStyle='rgba(249,115,22,0.9)';ctx.fillStyle='rgba(249,115,22,0.07)';ctx.lineWidth=1.2;
-  ctx.beginPath();ctx.moveTo(-50,8);ctx.lineTo(-44,-2);ctx.lineTo(-18,-14);ctx.lineTo(22,-14);ctx.lineTo(42,-4);ctx.lineTo(50,8);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-16,-14);ctx.lineTo(-6,-22);ctx.lineTo(16,-22);ctx.lineTo(26,-14);ctx.closePath();ctx.fillStyle='rgba(0,212,255,0.08)';ctx.fill();ctx.stroke();
-  [[-32,8],[28,8]].forEach(([wx])=>{ctx.beginPath();ctx.ellipse(wx,12,10,6,0,0,Math.PI*2);ctx.fillStyle='rgba(20,20,40,0.9)';ctx.fill();ctx.strokeStyle='rgba(200,200,255,0.35)';ctx.lineWidth=1;ctx.stroke();});
-  const eg=ctx.createRadialGradient(-54,5,0,-54,5,16);eg.addColorStop(0,'rgba(249,115,22,0.5)');eg.addColorStop(1,'transparent');
-  ctx.beginPath();ctx.arc(-54,5,13,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();
-  ctx.restore();
-}
-function drawPlane(x,y,sc,al,dir){
-  ctx.save();ctx.translate(x,y);ctx.scale(dir*sc,sc);ctx.globalAlpha=al;
-  ctx.strokeStyle='rgba(124,58,237,0.9)';ctx.fillStyle='rgba(124,58,237,0.06)';ctx.lineWidth=1.1;
-  ctx.beginPath();ctx.ellipse(0,0,65,10,0,0,Math.PI*2);ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(65,0);ctx.lineTo(82,2);ctx.lineTo(82,-2);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-8,58);ctx.lineTo(-26,58);ctx.lineTo(-14,0);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-8,-58);ctx.lineTo(-26,-58);ctx.lineTo(-14,0);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-54,0);ctx.lineTo(-68,24);ctx.lineTo(-62,7);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-54,0);ctx.lineTo(-68,-24);ctx.lineTo(-62,-7);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.restore();
-}
-function drawRocket(x,y,sc,al){
-  ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);ctx.rotate(-Math.PI/5);ctx.globalAlpha=al;
-  ctx.strokeStyle='rgba(200,220,255,0.8)';ctx.fillStyle='rgba(200,220,255,0.06)';ctx.lineWidth=1.1;
-  ctx.beginPath();ctx.moveTo(0,-48);ctx.lineTo(10,12);ctx.lineTo(-10,12);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(-10,12);ctx.lineTo(-22,28);ctx.lineTo(-5,16);ctx.closePath();ctx.fill();ctx.stroke();
-  ctx.beginPath();ctx.moveTo(10,12);ctx.lineTo(22,28);ctx.lineTo(5,16);ctx.closePath();ctx.fill();ctx.stroke();
-  const rg=ctx.createRadialGradient(0,30,0,0,30,18);rg.addColorStop(0,'rgba(249,115,22,0.7)');rg.addColorStop(1,'transparent');
-  ctx.beginPath();ctx.arc(0,30,15,0,Math.PI*2);ctx.fillStyle=rg;ctx.fill();
-  ctx.restore();
-}
-
+class Veh{constructor(type){this.type=type;this.dir=Math.random()>.5?1:-1;this.x=Math.random()*window.innerWidth;this.y=this.initY();this.spd=(0.5+Math.random()*.9)*(type==='jet'?2.2:type==='rocket'?.8:1);this.scale=.45+Math.random()*.5;this.alpha=.07+Math.random()*.12;}initY(){if(this.type==='car')return window.innerHeight*(.6+Math.random()*.3);if(this.type==='rocket')return Math.random()*window.innerHeight*.7;return Math.random()*window.innerHeight*.75;}update(){this.x+=this.spd*this.dir;if(this.dir===1&&this.x>canvas.width+220){this.dir=-1;this.x=canvas.width+200;this.y=this.initY();}if(this.dir===-1&&this.x<-220){this.dir=1;this.x=-200;this.y=this.initY();}}draw(){if(this.type==='jet')drawJet(this.x,this.y,this.scale,this.alpha,this.dir);else if(this.type==='car')drawCar(this.x,this.y,this.scale,this.alpha,this.dir);else if(this.type==='plane')drawPlane(this.x,this.y,this.scale,this.alpha,this.dir);else drawRocket(this.x,this.y,this.scale,this.alpha);}}
+function drawJet(x,y,sc,al,dir){ctx.save();ctx.translate(x,y);ctx.scale(dir*sc,sc);ctx.globalAlpha=al;ctx.strokeStyle='rgba(0,212,255,0.9)';ctx.fillStyle='rgba(0,212,255,0.06)';ctx.lineWidth=1.1;ctx.beginPath();ctx.moveTo(60,0);ctx.lineTo(15,8);ctx.lineTo(-40,6);ctx.lineTo(-50,0);ctx.lineTo(-40,-6);ctx.lineTo(15,-8);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(12,2);ctx.lineTo(-12,42);ctx.lineTo(-28,42);ctx.lineTo(-4,2);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(12,-2);ctx.lineTo(-12,-42);ctx.lineTo(-28,-42);ctx.lineTo(-4,-2);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-36,0);ctx.lineTo(-48,16);ctx.lineTo(-44,5);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-36,0);ctx.lineTo(-48,-16);ctx.lineTo(-44,-5);ctx.closePath();ctx.fill();ctx.stroke();const eg=ctx.createRadialGradient(-52,0,0,-52,0,14);eg.addColorStop(0,'rgba(249,115,22,0.65)');eg.addColorStop(1,'transparent');ctx.beginPath();ctx.arc(-52,0,12,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();ctx.restore();}
+function drawCar(x,y,sc,al,dir){ctx.save();ctx.translate(x,y);ctx.scale(dir*sc,sc);ctx.globalAlpha=al;ctx.strokeStyle='rgba(249,115,22,0.9)';ctx.fillStyle='rgba(249,115,22,0.07)';ctx.lineWidth=1.2;ctx.beginPath();ctx.moveTo(-50,8);ctx.lineTo(-44,-2);ctx.lineTo(-18,-14);ctx.lineTo(22,-14);ctx.lineTo(42,-4);ctx.lineTo(50,8);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-16,-14);ctx.lineTo(-6,-22);ctx.lineTo(16,-22);ctx.lineTo(26,-14);ctx.closePath();ctx.fillStyle='rgba(0,212,255,0.08)';ctx.fill();ctx.stroke();[[-32,8],[28,8]].forEach(([wx])=>{ctx.beginPath();ctx.ellipse(wx,12,10,6,0,0,Math.PI*2);ctx.fillStyle='rgba(20,20,40,0.9)';ctx.fill();ctx.strokeStyle='rgba(200,200,255,0.35)';ctx.lineWidth=1;ctx.stroke();});const eg=ctx.createRadialGradient(-54,5,0,-54,5,16);eg.addColorStop(0,'rgba(249,115,22,0.5)');eg.addColorStop(1,'transparent');ctx.beginPath();ctx.arc(-54,5,13,0,Math.PI*2);ctx.fillStyle=eg;ctx.fill();ctx.restore();}
+function drawPlane(x,y,sc,al,dir){ctx.save();ctx.translate(x,y);ctx.scale(dir*sc,sc);ctx.globalAlpha=al;ctx.strokeStyle='rgba(124,58,237,0.9)';ctx.fillStyle='rgba(124,58,237,0.06)';ctx.lineWidth=1.1;ctx.beginPath();ctx.ellipse(0,0,65,10,0,0,Math.PI*2);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(65,0);ctx.lineTo(82,2);ctx.lineTo(82,-2);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-8,58);ctx.lineTo(-26,58);ctx.lineTo(-14,0);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(8,0);ctx.lineTo(-8,-58);ctx.lineTo(-26,-58);ctx.lineTo(-14,0);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-54,0);ctx.lineTo(-68,24);ctx.lineTo(-62,7);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-54,0);ctx.lineTo(-68,-24);ctx.lineTo(-62,-7);ctx.closePath();ctx.fill();ctx.stroke();ctx.restore();}
+function drawRocket(x,y,sc,al){ctx.save();ctx.translate(x,y);ctx.scale(sc,sc);ctx.rotate(-Math.PI/5);ctx.globalAlpha=al;ctx.strokeStyle='rgba(200,220,255,0.8)';ctx.fillStyle='rgba(200,220,255,0.06)';ctx.lineWidth=1.1;ctx.beginPath();ctx.moveTo(0,-48);ctx.lineTo(10,12);ctx.lineTo(-10,12);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-10,12);ctx.lineTo(-22,28);ctx.lineTo(-5,16);ctx.closePath();ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(10,12);ctx.lineTo(22,28);ctx.lineTo(5,16);ctx.closePath();ctx.fill();ctx.stroke();const rg=ctx.createRadialGradient(0,30,0,0,30,18);rg.addColorStop(0,'rgba(249,115,22,0.7)');rg.addColorStop(1,'transparent');ctx.beginPath();ctx.arc(0,30,15,0,Math.PI*2);ctx.fillStyle=rg;ctx.fill();ctx.restore();}
 const vehs=[new Veh('jet'),new Veh('jet'),new Veh('jet'),new Veh('plane'),new Veh('plane'),new Veh('car'),new Veh('car'),new Veh('car'),new Veh('rocket'),new Veh('rocket')];
-
-function animate(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.strokeStyle='rgba(0,212,255,0.022)';ctx.lineWidth=1;
-  for(let x=0;x<canvas.width;x+=90){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();}
-  for(let y=0;y<canvas.height;y+=90){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();}
-  pts.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;
-    if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c+'0.55)';ctx.fill();
-  });
-  gears.forEach(g=>g.draw());
-  vehs.forEach(v=>{v.update();v.draw();});
-  [[canvas.width*.1,canvas.height*.25,'rgba(124,58,237,0.025)'],[canvas.width*.85,canvas.height*.55,'rgba(0,212,255,0.022)'],[canvas.width*.5,canvas.height*.85,'rgba(249,115,22,0.018)']].forEach(([bx,by,bc])=>{
-    const bg=ctx.createRadialGradient(bx,by,0,bx,by,220);bg.addColorStop(0,bc);bg.addColorStop(1,'transparent');
-    ctx.beginPath();ctx.arc(bx,by,220,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();
-  });
-  requestAnimationFrame(animate);
-}
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);ctx.strokeStyle='rgba(0,212,255,0.022)';ctx.lineWidth=1;for(let x=0;x<canvas.width;x+=90){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,canvas.height);ctx.stroke();}for(let y=0;y<canvas.height;y+=90){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(canvas.width,y);ctx.stroke();}pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c+'0.55)';ctx.fill();});gears.forEach(g=>g.draw());vehs.forEach(v=>{v.update();v.draw();});[[canvas.width*.1,canvas.height*.25,'rgba(124,58,237,0.025)'],[canvas.width*.85,canvas.height*.55,'rgba(0,212,255,0.022)'],[canvas.width*.5,canvas.height*.85,'rgba(249,115,22,0.018)']].forEach(([bx,by,bc])=>{const bg=ctx.createRadialGradient(bx,by,0,bx,by,220);bg.addColorStop(0,bc);bg.addColorStop(1,'transparent');ctx.beginPath();ctx.arc(bx,by,220,0,Math.PI*2);ctx.fillStyle=bg;ctx.fill();});requestAnimationFrame(animate);}
 animate();
 </script>
 </body>
