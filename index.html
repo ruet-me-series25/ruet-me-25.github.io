@@ -45,6 +45,37 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,6,15,0.93);backdrop-filt
 .ncat-btn:hover{border-color:var(--accent);color:var(--accent);}
 .ncat-btn.active{border-color:var(--accent2);color:#fff;background:rgba(124,58,237,0.18);}
 .ncat-btn svg{width:16px;height:16px;flex-shrink:0;}
+
+.teacher-btn, .cover-btn {
+  background: rgba(16, 185, 129, 0.04);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--muted);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 18px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all .22s;
+}
+.teacher-btn:hover {
+  border-color: var(--green);
+  color: #10b981;
+}
+.cover-btn:hover {
+  border-color: var(--accent3);
+  color: var(--accent3);
+}
+.teacher-btn svg, .cover-btn svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
 .ncat-btn .arrow{margin-left:4px;font-size:10px;transition:transform .2s;}
 .ncat-btn.open .arrow{transform:rotate(180deg);}
 .wa-dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:210px;background:rgba(10,14,35,0.98);border:1px solid var(--border);border-radius:10px;z-index:9999;overflow:hidden;box-shadow:0 8px 28px rgba(0,0,0,0.6);}
@@ -56,15 +87,30 @@ nav{position:sticky;top:0;z-index:100;background:rgba(4,6,15,0.93);backdrop-filt
 .dot-b{background:#a78bfa;}
 .dot-c{background:var(--accent3);}
 .dot-ts{background:var(--green);}
+
 .notice-panel{display:none;}
 .notice-panel.active{display:block;}
+
 .notice-card{background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent2);border-radius:10px;padding:22px 24px;margin-bottom:14px;transition:all .22s;animation:fadeUp .4s ease both;}
 .notice-card:hover{border-left-color:var(--accent);box-shadow:var(--glow);transform:translateX(4px);}
 .notice-date{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1.5px;margin-bottom:8px;}
 .notice-title{font-size:17px;font-weight:700;margin-bottom:10px;line-height:1.3;}
 .notice-link{color:var(--accent);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.5px;}
 .notice-link:hover{color:#fff;}
-.ext-link-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;animation:fadeUp .4s ease both;margin-bottom:14px;}
+
+.ext-link-card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  animation: fadeUp .4s ease both;
+  margin-bottom: 14px;
+  width: 100%;
+}
 .ext-link-card:hover{box-shadow:var(--glow);}
 .ext-link-label{font-size:16px;font-weight:700;}
 .ext-link-sub{font-size:12px;color:var(--muted);margin-top:3px;}
@@ -152,87 +198,76 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
   </div>
 </nav>
 
-<!-- ===== NOTICES ===== -->
 <section class="section active" id="sec-notices">
   <div class="sec-heading">LATEST NOTICES</div>
-  <div class="notice-cats">
+  <div class="notice-cats" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px; align-items: center;">
 
-    <!-- 1. All Notices (was Common) — FIRST -->
     <button class="ncat-btn active" onclick="showNoticePanel('common',this)" id="ncat-common">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
       All Notices
     </button>
 
-    <!-- 2. ME Dept -->
     <button class="ncat-btn" onclick="showNoticePanel('me',this)" id="ncat-me">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       ME Dept. Notice
     </button>
 
-    <!-- 3. University -->
     <button class="ncat-btn" onclick="showNoticePanel('uni',this)" id="ncat-uni">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
       University Notice
     </button>
 
-    <!-- 4. WhatsApp dropdown -->
-    <button class="ncat-btn" id="ncat-wa" onclick="toggleWaDropdown(event)">
-      <svg viewBox="0 0 24 24" fill="currentColor" style="color:#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      WhatsApp Notice
-      <span class="arrow">▾</span>
-      <div class="wa-dropdown" id="wa-dropdown">
-        <a class="wa-item" href="https://chat.whatsapp.com/FcNRmCdqiq3JXmd4QYOW88" target="_blank">
-          <span class="dot dot-a"></span> Section A
-        </a>
-        <a class="wa-item" href="https://chat.whatsapp.com/EtaUoK7VGAVG12iYakPBaV" target="_blank">
-          <span class="dot dot-b"></span> Section B
-        </a>
-        <a class="wa-item" href="https://chat.whatsapp.com/EGK5Myt0slkJ3rRqlyjkU9" target="_blank">
-          <span class="dot dot-c"></span> Section C
-        </a>
-        <a class="wa-item" href="https://chat.whatsapp.com/HwH8Avq0cot85W1oGpSFNs" target="_blank">
-          <span class="dot dot-ts"></span> Teachers &amp; Students
-        </a>
-      </div>
+    <button class="ncat-btn" onclick="showNoticePanel('teacher',this)" id="ncat-teacher">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 01 0 7.75"></path>
+      </svg>
+      Our Teachers
     </button>
+    
+    <a class="cover-btn" href="https://ruet-cover-page.github.io/" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      Cover Page Generator
+    </a>
 
   </div>
 
- <!-- All Notices Panel (1st, active) -->
-<div class="notice-panel" id="panel-common">
-
+  <div class="notice-panel active" id="panel-common">
     <div class="notice-card">
-    <div class="notice-date">June 14, 2026</div>
-    <div class="notice-title">CT Routine</div>
-    <a href="https://drive.google.com/file/d/1H71i6i9s1YqYMfOQXzKdQ361kt2p_I3Z/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
+      <div class="notice-date">June 14, 2026</div>
+      <div class="notice-title">CT Routine</div>
+      <a href="https://drive.google.com/file/d/1H71i6i9s1YqYMfOQXzKdQ361kt2p_I3Z/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
+    </div>
+    <div class="notice-card">
+      <div class="notice-date">MAY 19, 2026</div>
+      <div class="notice-title">Notice on General Safety and Accident Prevention During Eid-ul-Adha Holidays</div>
+      <a href="https://drive.google.com/file/d/14zZpQLz4eqepECtemPSI-Xt-jPOizSAg/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
+    </div>
+    <div class="notice-card">
+      <div class="notice-date">MAY 17, 2026</div>
+      <div class="notice-title">Student Registration Serial No.</div>
+      <a href="https://drive.google.com/file/d/1-FKE28I2DASll_mQZ_Yk-aLgK-I6QXKE/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
+    </div>
+    <div class="notice-card">
+      <div class="notice-date">MAY 11, 2026</div>
+      <div class="notice-title">Notice regarding submission of bank account details by board scholarship recipients of all departments</div>
+      <a href="https://drive.google.com/file/d/15FbwEvx9vyN-3R7GFq19i4YLnl_2QqbI/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
+    </div>
+    <div class="notice-card">
+      <div class="notice-date">MAY 08, 2026</div>
+      <div class="notice-title">ME Department Students Roll Allocation</div>
+      <a href="https://drive.google.com/file/d/1yPc5O6Mb-t4PCO2LEs_ujwYNLaGA0XY-/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
+    </div>
   </div>
 
-  <div class="notice-card">
-    <div class="notice-date">MAY 19, 2026</div>
-    <div class="notice-title">Notice on General Safety and Accident Prevention During Eid-ul-Adha Holidays</div>
-    <a href="https://drive.google.com/file/d/14zZpQLz4eqepECtemPSI-Xt-jPOizSAg/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
-  </div>
-
-  <div class="notice-card">
-    <div class="notice-date">MAY 17, 2026</div>
-    <div class="notice-title">Student Registration Serial No.</div>
-    <a href="https://drive.google.com/file/d/1-FKE28I2DASll_mQZ_Yk-aLgK-I6QXKE/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
-  </div>
-  <div class="notice-card">
-    <div class="notice-date">MAY 11, 2026</div>
-    <div class="notice-title">Notice regarding submission of bank account details by board scholarship recipients of all departments</div>
-    <a href="https://drive.google.com/file/d/15FbwEvx9vyN-3R7GFq19i4YLnl_2QqbI/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
-  </div>
- <div class="notice-card">
-    <div class="notice-date">MAY 08, 2026</div>
-    <div class="notice-title">ME Department Students Roll Allocation</div>
-    <a href="https://drive.google.com/file/d/1yPc5O6Mb-t4PCO2LEs_ujwYNLaGA0XY-/view?usp=drive_link" target="_blank" class="notice-link">Download Notice (PDF)</a>
-  </div>
-  
-
-</div>
-
-  <!-- ME Dept Panel -->
   <div class="notice-panel" id="panel-me">
     <div class="ext-link-card">
       <div>
@@ -243,7 +278,6 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
     </div>
   </div>
 
-  <!-- University Panel -->
   <div class="notice-panel" id="panel-uni">
     <div class="ext-link-card">
       <div>
@@ -253,9 +287,18 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
       <a href="https://www.ruet.ac.bd/notice" target="_blank" class="btn-visit">Visit →</a>
     </div>
   </div>
+
+  <div class="notice-panel" id="panel-teacher">
+    <div class="ext-link-card">
+      <div>
+        <div class="ext-link-label">ME Department Teachers Directory</div>
+        <div class="ext-link-sub">me.ruet.ac.bd – Faculty members of Mechanical Engineering Department</div>
+      </div>
+      <a href="https://www.me.ruet.ac.bd/teacher" target="_blank" class="btn-visit">Visit →</a>
+    </div>
+  </div>
 </section>
 
-<!-- ===== CLASS NOTES & RESOURCES ===== -->
 <section class="section" id="sec-resources">
   <div class="sec-heading">CLASS NOTES &amp; RESOURCES</div>
 
@@ -292,17 +335,16 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
     <a class="drive-card prev-card" href="https://sites.google.com/view/ruetmechabot" target="_blank">
       <div class="drive-icon">🤖</div>
       <div class="drive-name">Mechabot</div>
-      <div class="drive-sub">sites.google.com/view/ruetmechabot</div>
+      <div class="btn-visit" style="margin-top:8px;">Visit →</div>
     </a>
     <a class="drive-card prev-card" href="https://mechaverse.wealthdock.org/" target="_blank">
       <div class="drive-icon">🌐</div>
       <div class="drive-name">Mechaverse</div>
-      <div class="drive-sub">mechaverse.wealthdock.org</div>
+      <div class="btn-visit" style="margin-top:8px;">Visit →</div>
     </a>
   </div>
 </section>
 
-<!-- ===== OUR FAMILY ===== -->
 <section class="section" id="sec-family">
   <div class="sec-heading">OUR FAMILY <span class="count-badge" id="stuCount">180 Students</span></div>
   <div class="section-sub">
@@ -329,23 +371,11 @@ footer{position:relative;z-index:5;text-align:center;padding:22px 20px 14px;bord
 // NOTICE FUNCTIONS
 // ======================================================
 function showNoticePanel(id,btn){
-  document.querySelectorAll('.ncat-btn').forEach(b=>{b.classList.remove('active');b.classList.remove('open');});
+  document.querySelectorAll('.ncat-btn').forEach(b=>{b.classList.remove('active');});
   document.querySelectorAll('.notice-panel').forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('panel-'+id).classList.add('active');
 }
-function toggleWaDropdown(e){
-  e.stopPropagation();
-  const btn=document.getElementById('ncat-wa');
-  const isOpen=btn.classList.contains('open');
-  document.querySelectorAll('.ncat-btn').forEach(b=>{b.classList.remove('active');b.classList.remove('open');});
-  document.querySelectorAll('.notice-panel').forEach(p=>p.classList.remove('active'));
-  if(!isOpen){btn.classList.add('open');btn.classList.add('active');}
-}
-document.addEventListener('click',()=>{
-  const wa=document.getElementById('ncat-wa');
-  if(wa){wa.classList.remove('open');}
-});
 
 // ======================================================
 // STUDENT DATA
@@ -353,12 +383,12 @@ document.addEventListener('click',()=>{
 // fb = facebook profile link, phone = phone number
 // ======================================================
 const students=[
-  {roll:"2502001",name:"Atiq Faiyaz Rahman",section:"A",phone:"01734026425",fb:"https://www.facebook.com/share/1D5mF71pf7/",img:"https://drive.google.com/thumbnail?id=1snslufgj9PiTgDMHtn6IdGuFHIxtptxn&sz=w200",cr:false},
+{roll:"2502001",name:"Atiq Faiyaz Rahman",section:"A",phone:"01734026425",fb:"https://www.facebook.com/share/1D5mF71pf7/",img:"https://drive.google.com/thumbnail?id=1snslufgj9PiTgDMHtn6IdGuFHIxtptxn&sz=w200",cr:false},
   {roll:"2502002",name:"Farhan Sadik Siam",section:"A",phone:"",fb:"https://www.facebook.com/profile.php?id=100080350512445",img:"https://drive.google.com/thumbnail?id=10zaUJ_DL3le5sjEfw2LQOh7hcSluWz7j&sz=w200",cr:false},
   {roll:"2502003",name:"Salman Aziz Mahi",section:"A",phone:"",fb:"https://www.facebook.com/profile.php?id=61587489802099",img:"https://drive.google.com/thumbnail?id=1gHlZfPsy1qkHyNCYw6EEgdwtclR_qaHp&sz=w200",cr:false},
   {roll:"2502004",name:"Tasnim Alam Shuvro",section:"A",phone:"",fb:"https://www.facebook.com/yashrif.shuvro",img:"https://drive.google.com/thumbnail?id=1iojqOcId-Kjm4SWjrsu6_AEhp6bSErYm&sz=w200",cr:false},
   {roll:"2502005",name:"Md. Mahadi Hassan Bhuiyan",section:"A",phone:"'01818962428",fb:"https://www.facebook.com/share/1GLewyMM8p/?mibextid=wwXIfr",img:"https://drive.google.com/thumbnail?id=1YN-1v75lsxoJkQ-bI6PD2_jyk6MJdQ2Z&sz=w200",cr:false},
-  {roll:"2502006",name:"Tasnia Ahmed",section:"A",phone:"01863005004",fb:"https://www.facebook.com/share/1ESHfSVPgJ/",img:"https://drive.google.com/thumbnail?id=1iG-uUpQIE_zYkS8MNqoiNu7DKMy2_kCj&sz=w200",cr:false},
+  {roll:"2502006",name:"Tasnia Ahmed",section:"A",phone:"01863005004",fb:"https://www.facebook.com/share/1ESHfSVPgJ/",img:"https://drive.google.com/thumbnail?id=1sY5XMcaEP08BjeKE-vA5YN6C4bpbcbIg&sz=w200",cr:false},
   {roll:"2502007",name:"Md. Omar Faruque",section:"A",phone:"01606192256",fb:"https://www.facebook.com/share/18jniGmMWi/",img:"https://drive.google.com/thumbnail?id=1--6BeaKurKAFHYEb-AvefqWdg1NDQzpw&sz=w200",cr:false},
   {roll:"2502008",name:"Rhiju Dhar",section:"A",phone:"01816814085",fb:"https://www.facebook.com/share/1cJCHTWKTx/",img:"https://drive.google.com/thumbnail?id=1-E9KJLeCygm_gKixk07ENjsEOylXR19E&sz=w200",cr:false},
   {roll:"2502009",name:"Eamin Mahmud",section:"A",phone:"01909337312",fb:"https://www.facebook.com/share/18mocfAe2t/",img:"https://drive.google.com/thumbnail?id=1DPIwKjREcd-AoymHZuZz6pmBRxwWZcpy&sz=w200",cr:false},
@@ -383,10 +413,10 @@ const students=[
   {roll:"2502028",name:"Ehsanul Kabir",section:"A",phone:"01403799735",fb:"https://www.facebook.com/share/18hQAVjfrQ/",img:"https://drive.google.com/thumbnail?id=1jrPxcAcYqdJY17KIHSuvU2EwHbeLbNzJ&sz=w200",cr:false},
   {roll:"2502029",name:"Mahid Khan",section:"A",phone:"01707940707",fb:"https://www.facebook.com/share/1EZj8p2ZFz/",img:"https://drive.google.com/thumbnail?id=12S2kbV_SuZTt0q5Q-kW3kvvLfcUiVOTi&sz=w200",cr:false},
   {roll:"2502030",name:"Pritul Devnath",section:"A",phone:"01712893899",fb:"https://www.facebook.com/share/1K8hkpCAXZ/",img:"https://drive.google.com/thumbnail?id=1Y7eDw7LVvbv23C89e78wd4s7GcUlE9ot&sz=w200",cr:false},
-  {roll:"2502031",name:"Toha Islam",section:"A",phone:"",fb:"https://www.facebook.com/touha.islam.56",img:"",cr:false},
+  {roll:"2502031",name:"Toha Islam",section:"A",phone:"'01784747706",fb:"https://www.facebook.com/touha.islam.56",img:"",cr:false},
   {roll:"2502032",name:"Farhana Alam",section:"A",phone:"01756408416",fb:"https://www.facebook.com/share/1JjMnUwbpC/",img:"https://drive.google.com/thumbnail?id=1pkkQnnA4nqFKh2vnZ8KnCaWfo7g09Ye2&sz=w200",cr:false},
-  {roll:"2502033",name:"Muntasir Mahbub",section:"A",phone:"01572934615",fb:"https://www.facebook.com/share/18w6htVtZw/",img:"https://drive.google.com/thumbnail?id=1Zw-Odt0JEVmF6L_jC2yK5KU8k9odaRqZ&sz=w200",cr:false},
-  {roll:"2502034",name:"Md. Naimur Rahman",section:"A",phone:"01979575587",fb:"https://www.facebook.com/share/1CtKb25v8W/",img:"https://drive.google.com/thumbnail?id=1W54cZ5UgGyI22q9u6r2NUlB4g1k34NEK&sz=w200",cr:true},
+  {roll:"2502033",name:"Muntasir Mahbub",section:"A",phone:"01572934615",fb:"https://www.facebook.com/share/18w6htVtZw/",img:"https://drive.google.com/thumbnail?id=1lIlHXyn98LvdkU5Nf1p6J54OxvlXfTzu&sz=w200",cr:false},
+  {roll:"2502034",name:"Md. Naimur Rahman",section:"A",phone:"01979575587",fb:"https://www.facebook.com/share/1CtKb25v8W/",img:"https://drive.google.com/thumbnail?id=1GTDaj10FGA81mFgDkCYAwugrMf035FRF&sz=w200",cr:true},
   {roll:"2502035",name:"Mahir Mahamud",section:"A",phone:"01331603194",fb:"https://www.facebook.com/profile.php?id=61589479734653",img:"https://drive.google.com/thumbnail?id=1y_HKzHTAZfuXby88lZMHIkygfnwwBA2j&sz=w200",cr:false},
   {roll:"2502036",name:"Md. Naim Hossain",section:"A",phone:"01586375721",fb:"https://www.facebook.com/NaimHossain2007",img:"https://drive.google.com/thumbnail?id=1oxauVNDVv2-K5c9dLhLCpq7iYAVV6wfb&sz=w200",cr:false},
   {roll:"2502037",name:"Swarnil Banik",section:"A",phone:"",fb:"https://www.facebook.com/swarnil.banik.2025",img:"https://drive.google.com/thumbnail?id=1hL0ELQobdxMd_CmLW9pPRjriJGbhfhqi&sz=w200",cr:false},
@@ -413,7 +443,7 @@ const students=[
   {roll:"2502058",name:"Junaid Jamal Tasin",section:"A",phone:"01919540432",fb:"https://www.facebook.com/muhammad.tasin.73132",img:"https://drive.google.com/thumbnail?id=1nX2_2IHpQ2aXLwqTysNsvVcR9-morGZD&sz=w200",cr:false},
   {roll:"2502059",name:"Md. Yasin Kazi",section:"A",phone:"01308474174",fb:"https://www.facebook.com/share/17kwoEj2kK/",img:"https://drive.google.com/thumbnail?id=1Day7jo86CYNUmHgqBSuc6tROgDsl5Db4&sz=w200",cr:false},
   {roll:"2502060",name:"Taofiqul Islam Rupom",section:"A",phone:"",fb:"",img:"",cr:false},
-  {roll:"2502061",name:"S. M. Iftekhar Alam Tanvir",section:"B",phone:"01914412921",fb:"https://www.facebook.com/share/1FFzhPMAh6/",img:"https://drive.google.com/thumbnail?id=1ab1KO9SSx2pthdlH3LKOmHOgW6Ark1Do&sz=w200",cr:true},
+  {roll:"2502061",name:"S. M. Iftekhar Alam Tanvir",section:"B",phone:"01914412921",fb:"https://www.facebook.com/share/1FFzhPMAh6/",img:"https://drive.google.com/thumbnail?id=1ab1KO9SSx2pthdlH3LKOmHOgW6Ark1Do&sz=w200",cr:false},
   {roll:"2502062",name:"Abdullah Al Aziz",section:"B",phone:"",fb:"",img:"",cr:false},
   {roll:"2502063",name:"Afiah Mubashshirah",section:"B",phone:"01753102162",fb:"https://www.facebook.com/AfiJeon",img:"https://drive.google.com/thumbnail?id=1RgGo9VY71dqa9P0yXUwQPP__sAFI34ZQ&sz=w200",cr:false},
   {roll:"2502064",name:"Sumita Binte Habib Sneha",section:"B",phone:"01771442417",fb:"https://www.facebook.com/share/17mCgWwFJ7/",img:"https://drive.google.com/thumbnail?id=1fe5cTnvb_5bUpjfiBWGJGHSfG4oSXb3U&sz=w200",cr:false},
@@ -483,7 +513,7 @@ const students=[
   {roll:"2502128",name:"Iftekhar Al Sami",section:"C",phone:"",fb:"",img:"",cr:false},
   {roll:"2502129",name:"Nowsen Motin Nowreen",section:"C",phone:"01610744577",fb:"https://www.facebook.com/share/191QavdfyM/",img:"https://drive.google.com/thumbnail?id=1vNtUQMzQj5dVtcAfPLomw6Co8e2ZRu52&sz=w200",cr:false},
   {roll:"2502130",name:"Md. Taseen Mosharof",section:"C",phone:"01575818699",fb:"https://www.facebook.com/share/1FCMPzLsGc/",img:"https://drive.google.com/thumbnail?id=1Qpj-0KxDEdyxGcFBkQtkaHd1Rx5p1BEN&sz=w200",cr:false},
-  {roll:"2502131",name:"Md. Mehedi Hasan Soikot",section:"C",phone:"",fb:"",img:"",cr:false},
+  {roll:"2502131",name:"Md. Mehedi Hasan Soikot",section:"C",phone:"",fb:"",img:"",cr:true},
   {roll:"2502132",name:"Shahedul Alam Tahasin",section:"C",phone:"",fb:"",img:"",cr:false},
   {roll:"2502133",name:"Md. Mostafizur Sarker",section:"C",phone:"01780062800",fb:"https://www.facebook.com/share/1EYkJPATgY/",img:"https://drive.google.com/thumbnail?id=1hm0Z_R8dUYXNJuAT2Zt0SCwQJU2f_G17&sz=w200",cr:false},
   {roll:"2502134",name:"Shuvajit Dwari",section:"C",phone:"",fb:"",img:"",cr:false},
@@ -517,7 +547,7 @@ const students=[
   {roll:"2502162",name:"Apon Saha",section:"C",phone:"",fb:"",img:"",cr:false},
   {roll:"2502163",name:"Swapno Barshan Das",section:"C",phone:"01956315725",fb:"https://www.facebook.com/share/1Hp7HAFgJz/",img:"https://drive.google.com/thumbnail?id=1bzxXfoMQfRbBi9EfZvbIbYssMHHBEFPy&sz=w200",cr:false},
   {roll:"2502164",name:"Md. Arif Hasnat Sahib",section:"C",phone:"",fb:"",img:"",cr:false},
-  {roll:"2502165",name:"Al Musabbir Hossain",section:"C",phone:"",fb:"https://www.facebook.com/musabbir24/",img:"https://drive.google.com/thumbnail?id=1HC5NGlbJkGUeXdH10pf3VZt0B26FT8Sv&sz=w200",cr:false},
+  {roll:"2502165",name:"Al Musabbir Hossain",section:"C",phone:"",fb:"https://www.facebook.com/musabbir24/",img:"https://drive.google.com/thumbnail?id=1HC5NGlbJkGUeXdH10pf3VZt0B26FT8Sv&sz=w200",cr:true},
   {roll:"2502166",name:"Mohammad Mahir Labib",section:"C",phone:"01937426859",fb:"https://www.facebook.com/share/18xP8THevK/",img:"https://drive.google.com/thumbnail?id=1sJp5WcLROiXVGqq82rwgXWmwbbXL3wIO&sz=w200",cr:false},
   {roll:"2502167",name:"Radiat Rahman",section:"C",phone:"01581494847",fb:"https://www.facebook.com/radiat.rahman.31",img:"https://drive.google.com/thumbnail?id=1bFP8m-8zypCUHzOdL6MdA3tggxXhoQkW&sz=w200",cr:false},
   {roll:"2502168",name:"Ahanaf Rayeed",section:"C",phone:"",fb:"",img:"",cr:false},
